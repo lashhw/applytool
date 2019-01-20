@@ -5,16 +5,16 @@
                                FROM applyData WHERE name REGEXP ?;");
   $stmt_apply->execute(array($_GET["q"]));
   ?>
-  <table class="table table-striped">
+  <table id="search_result" class="table table-striped">
     <tr>
-      <th width="20%">學校</th>
-      <th width="50%">科系</th>
+      <th width="11%">學校</th>
+      <th width="20%">科系</th>
       <th width="5%">國文</th>
       <th width="5%">英文</th>
       <th width="5%">數學</th>
       <th width="5%">社會</th>
       <th width="5%">自然</th>
-      <th width="5%">ID</th>
+      <th width="7%">ID</th>
     </tr>
     <?php foreach ($stmt_apply->fetchAll() as $row):?>
     <?php
