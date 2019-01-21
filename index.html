@@ -21,7 +21,7 @@
 				document.getElementById("result").innerHTML = this.responseText;
 			}
 		};
-		xhttp.open("GET", "getResult.php?qd=" + $("#qd")[0].value + "&qs=" + $("#qs")[0].value, true);
+		xhttp.open("GET", "result.php?qd=" + $("#qd")[0].value + "&qs=" + $("#qs")[0].value, true);
 		xhttp.send();
 	}
 	// auto search when the page is loaded.
