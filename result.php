@@ -18,7 +18,7 @@ function getSchoolName($id,$row,$pdo){
 }
 
 //convert to formatted string
-$table_colors = array(
+$table_class = array(
   "頂標"=>"s1",
   "前標"=>"s2",
   "均標"=>"s3",
@@ -29,8 +29,8 @@ $table_colors = array(
 );
 function getFormatted($str){
   // echo "<script>console.log('".$str."');</script>";
-  if(array_key_exists($str,$GLOBALS["table_colors"]))
-    return "<td class='subject ".$GLOBALS["table_colors"][$str]."'>".$str."</td>";
+  if(array_key_exists($str,$GLOBALS["table_class"]))
+    return "<td class='subject ".$GLOBALS["table_class"][$str]."'>".$str."</td>";
   else
     return "<td class='subject td_default'></td>";
 }
