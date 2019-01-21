@@ -1,38 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>申請入學採計科目篩選器</title>
-
+	<!-- boostrap,jquery,popper.js and custom css -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style.css?v=20190121">
 
 	<script>
+	// search funtion; uses ajax to process the result.
 	function search(){
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
-    	if (this.readyState == 4 && this.status == 200) {
-      	document.getElementById("result").innerHTML = this.responseText;
-    	}
-  	};
-  	xhttp.open("GET", "getResult.php?q=" + $("#qd")[0].value + "&s=" + $("#qs")[0].value, true);
-  	xhttp.send();
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("result").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET", "getResult.php?qd=" + $("#qd")[0].value + "&qs=" + $("#qs")[0].value, true);
+		xhttp.send();
 	}
+	// auto search when the page is loaded.
+	$(document).ready(function(){
+		search();
+	});
 	</script>
 </head>
 <body>
+	<!-- title bar -->
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 	  	<h1>申請入學採計科目篩選器</h1>
 			<p>來看看你想讀的科系採計哪些科目吧！</p>
 		</div>
 	</div>
-
+	<!-- search form -->
 	<div class="container form-group">
 		<div class="input-group mb-3">
 		  <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" onkeyup="search()">
@@ -45,7 +51,7 @@
 		  </div>
 		</div>
 	</div>
-
+	<!-- the location to place the result table -->
 	<div id="result"></div>
 </body>
 </html>

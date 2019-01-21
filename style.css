@@ -1,4 +1,30 @@
-#search_result{
+#result{
+}
+#table_result{
   table-layout: fixed;
   word-wrap: break-word;
+}
+.s1{
+  background-color: #ccff99;
+}
+.s2{
+  background-color: #e6ff99;
+}
+.s3{
+  background-color: #ffffb3;
+}
+.s4{
+  background-color: #ffe699;
+}
+.s5{
+  background-color: #ffcc99;
+}
+.s6{
+  background-color: #e6ffff;
+}
+.s7{
+  background-color: #ffe6f2;
+}
+.td_default{
+  background-color: #f2f2f2;
 }
