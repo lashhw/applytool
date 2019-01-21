@@ -1,70 +1,70 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>申請入學採計科目篩選器</title>
-	<!-- boostrap,jquery,popper.js and custom css -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="style.css?v=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>申請入學採計科目篩選器</title>
+  <!-- boostrap,jquery,popper.js and custom css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="style.css?v=1">
 
-	<script>
-	// search funtion; uses ajax to process the result.
-	function search(){
-		$.ajax({
-			type: "GET",
-			data: {qd: $("#qd")[0].value, qs: $("#qs")[0].value},
-	    url: "result.php",
-	    beforeSend: function() {
-				// show loading spinner
-	      $("#loading").show();
-	    },
-	    success: function(data) {
-				$("#result").html(data);
-				// hide loading spinner
-	      $("#loading").hide();
-	    }
-		});
-	}
+  <script>
+  // search funtion; uses ajax to process the result.
+  function search(){
+    $.ajax({
+      type: "GET",
+      data: {qd: $("#qd")[0].value, qs: $("#qs")[0].value},
+      url: "result.php",
+      beforeSend: function() {
+        // show loading spinner
+        $("#loading").show();
+      },
+      success: function(data) {
+        $("#result").html(data);
+        // hide loading spinner
+        $("#loading").hide();
+      }
+    });
+  }
 
-	$(document).ready(function(){
-		// auto search when the page is loaded
-		search();
-	});
-	</script>
+  $(document).ready(function(){
+    // auto search when the page is loaded
+    search();
+  });
+  </script>
 </head>
 <body>
-	<!-- title bar -->
-	<div class="jumbotron jumbotron-fluid">
-		<div class="container">
-	  	<h1>申請入學採計科目篩選器</h1>
-			<p>來看看你想讀的科系採計哪些科目吧！</p>
-		</div>
-	</div>
-	<!-- search form -->
-	<div class="container form-group">
-		<div class="input-group mb-3">
-		  <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" onkeyup="search()">
-		  <div class="input-group-append">
-				<span class="input-group-text">@</span>
-			</div>
-			<input type="text" class="form-control" id="qs" placeholder="學校名稱" value="" onkeyup="search()">
-			<div class="input-group-append">
-		    <button class="btn btn-primary" onclick="search()">搜尋</button>
-		  </div>
-		</div>
-	</div>
-	<!-- the location to place the result table -->
-	<div id="result"></div>
+  <!-- title bar -->
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1>申請入學採計科目篩選器</h1>
+      <p>來看看你想讀的科系採計哪些科目吧！</p>
+    </div>
+  </div>
+  <!-- search form -->
+  <div class="container form-group">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" onkeyup="search()">
+      <div class="input-group-append">
+        <span class="input-group-text">@</span>
+      </div>
+      <input type="text" class="form-control" id="qs" placeholder="學校名稱" value="" onkeyup="search()">
+      <div class="input-group-append">
+        <button class="btn btn-primary" onclick="search()">搜尋</button>
+      </div>
+    </div>
+  </div>
+  <!-- the location to place the result table -->
+  <div id="result"></div>
   <!-- loading spinner -->
-	<div id="loading" class="text-center">
-  	<div class="spinner-border text-secondary" role="status">
-    	<span class="sr-only">載入中...</span>
-  	</div>
-	</div>
+  <div id="loading" class="text-center">
+    <div class="spinner-border text-secondary" role="status">
+      <span class="sr-only">載入中...</span>
+    </div>
+  </div>
 </body>
 </html>
