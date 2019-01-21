@@ -2,10 +2,12 @@
 //config file
 require "config.php";
 
-// if 'qd' is empty, set it to '(?!.*)'(don't match anything)
-if($_GET["qd"]=="")$_GET["qd"]="(?!.*)";
+// if 'qd' and 'qs' are empty, set them to '(?!.*)'(don't match anything)
+if($_GET["qd"]==""&&$_GET["qs"]=="")$_GET["qd"]=$_GET["qs"]="(?!.*)";
+// if 'qd' is empty, set it to '.*'(match any character(s))
+else if($_GET["qd"]=="")$_GET["qd"]=".*";
 // if 'qs' is empty, set it to '.*'(match any character(s))
-if($_GET["qs"]=="")$_GET["qs"]=".*";
+else if($_GET["qs"]=="")$_GET["qs"]=".*";
 
 // convert id to school name
 function getSchoolName($id,$row,$pdo){
