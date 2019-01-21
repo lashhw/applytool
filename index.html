@@ -15,10 +15,14 @@
 	<script>
 	// search funtion; uses ajax to process the result.
 	function search(){
+		$("#loading").html(
+			"<div class='spinner-border text-secondary' role='status'><span class='sr-only'>Loading...</span></div>"
+		);
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("result").innerHTML = this.responseText;
+				$("#result").html(this.responseText);
+				$("#loading").hide();
 			}
 		};
 		xhttp.open("GET", "result.php?qd=" + $("#qd")[0].value + "&qs=" + $("#qs")[0].value, true);
@@ -53,5 +57,7 @@
 	</div>
 	<!-- the location to place the result table -->
 	<div id="result"></div>
+  <!-- loading spinner -->
+  <div id="loading" class="text-center"></div>
 </body>
 </html>

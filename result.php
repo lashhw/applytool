@@ -35,6 +35,7 @@ function getFormatted($str){
     return "<td class='subject td_default'></td>";
 }
 ?>
+
 <div class="container">
   <?php
   // serach for data whose name is regexly match
