@@ -2,8 +2,8 @@
 //config file
 require "config.php";
 
-// if 'qd' and 'qs' are empty, set them to '(?!.*)'(don't match anything)
-if($_GET["qd"]==""&&$_GET["qs"]=="")$_GET["qd"]=$_GET["qs"]="(?!.*)";
+// if 'qd' and 'qs' are empty, exit
+if($_GET["qd"]==""&&$_GET["qs"]=="")exit;
 // if 'qd' is empty, set it to '.*'(match any character(s))
 else if($_GET["qd"]=="")$_GET["qd"]=".*";
 // if 'qs' is empty, set it to '.*'(match any character(s))
