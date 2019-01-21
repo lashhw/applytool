@@ -16,7 +16,6 @@ error_reporting(E_ALL);
 // connect to database. if errors occurred, display the error message.
 try{
     $pdo_apply = new PDO("mysql:host=".$DB_SERVER.";dbname=".$DB_NAME.";charset=utf8mb4",$DB_USERNAME,$DB_PASSWORD);
-    $pdo_apply->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
     $pdo_apply->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e){
