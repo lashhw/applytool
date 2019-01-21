@@ -2,8 +2,9 @@
 //config file
 require "config.php";
 
-// if 'qd' or 'qs' is empty, set it to '.*'(match any character(s))
-if($_GET["qd"]=="")$_GET["qd"]=".*";
+// if 'qd' is empty, set it to '(?!.*)'(don't match anything)
+if($_GET["qd"]=="")$_GET["qd"]="(?!.*)";
+// if 'qs' is empty, set it to '.*'(match any character(s))
 if($_GET["qs"]=="")$_GET["qs"]=".*";
 
 // convert id to school name
@@ -27,11 +28,11 @@ $table_colors = array(
   "二階"=>"s7"
 );
 function getFormatted($str){
-  echo "<script>console.log('".$str."');</script>";
+  // echo "<script>console.log('".$str."');</script>";
   if(array_key_exists($str,$GLOBALS["table_colors"]))
-    return "<td class='".$GLOBALS["table_colors"][$str]."'>".$str."</td>";
+    return "<td class='subject ".$GLOBALS["table_colors"][$str]."'>".$str."</td>";
   else
-    return "<td class='td_default'></td>";
+    return "<td class='subject td_default'></td>";
 }
 ?>
 <div class="container">
@@ -44,35 +45,36 @@ function getFormatted($str){
   <table id="table_result" class="table">
     <thead class="thead-light">
       <tr>
-        <th width="10%">學校</th>
-        <th width="15%">科系</th>
-        <th width="5%">國文</th>
-        <th width="5%">英文</th>
-        <th width="5%">數學</th>
-        <th width="5%">社會</th>
-        <th width="5%">自然</th>
+        <th width="20%">學校</th>
+        <th width="30%">科系</th>
+        <th width="10%" class="subject">國文</th>
+        <th width="10%" class="subject">英文</th>
+        <th width="10%" class="subject">數學</th>
+        <th width="10%" class="subject">社會</th>
+        <th width="10%" class="subject">自然</th>
       </tr>
     </thead>
 
     <!-- loop through every rows which match regex and fliter schoolname -->
+    <?php $cnt = 0; ?>
     <?php foreach ($stmt_apply->fetchAll() as $row):?>
       <?php $schoolname = getSchoolName($row["id"],$row,$pdo_apply);?>
       <?php if(preg_match("/".$_GET["qs"]."/",$schoolname)):?>
-      <tr>
-        <td class='td_default'><?php echo $schoolname?></td>
-        <td class='td_default'>
-          <!-- link to cac -->
-          <a href="<?php echo 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_'.$row['id'].'.htm'?>"
-             target="_blank">
-            <?php echo $row["name"]?>
-          </a>
-        </td>
-        <?php echo getFormatted($row["chinese"])?>
-        <?php echo getFormatted($row["english"])?>
-        <?php echo getFormatted($row["math"])?>
-        <?php echo getFormatted($row["society"])?>
-        <?php echo getFormatted($row["science"])?>
-      </tr>
+        <tr>
+          <td class='td_default'><?php echo $schoolname?></td>
+          <td class='td_default'>
+            <!-- link to cac -->
+            <a href="<?php echo 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_'.$row['id'].'.htm'?>"
+               target="_blank">
+              <?php echo $row["name"]?>
+            </a>
+          </td>
+          <?php echo getFormatted($row["chinese"])?>
+          <?php echo getFormatted($row["english"])?>
+          <?php echo getFormatted($row["math"])?>
+          <?php echo getFormatted($row["society"])?>
+          <?php echo getFormatted($row["science"])?>
+        </tr>
       <?php endif;?>
     <?php endforeach;?>
   </table>
