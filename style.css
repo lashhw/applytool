@@ -1,3 +1,14 @@
+#title_text{
+  font-size: 3rem;
+}
+@media (max-width: 768px){
+  #table_result{
+    font-size: 0.8rem;
+  }
+  #title_text{
+    font-size: 1.8rem;
+  }
+}
 #table_result{
   table-layout: fixed;
   word-wrap: break-word;
