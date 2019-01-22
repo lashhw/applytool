@@ -48,7 +48,12 @@ function getFormatted($str){
     // search for data whose name and schoolname are regexly match
     $stmt_apply = $pdo_apply->prepare("SELECT id,name,chinese,math,english,society,science,school
                                        FROM applyData WHERE name REGEXP ? AND school REGEXP ?;");
-    $stmt_apply->execute(array($_GET["qd"],$_GET["qs"]));
+    try{
+      $stmt_apply->execute(array($_GET["qd"],$_GET["qs"]));
+    }
+    catch(Exception $e){
+      exit;
+    }
     ?>
     <!-- loop through every rows which match regex and fliter schoolname -->
     <?php foreach ($stmt_apply->fetchAll() as $row):?>
