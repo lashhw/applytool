@@ -2,21 +2,13 @@
 //config file
 require "config.php";
 
-// if 'qd' and 'qs' are empty, exit
-if($_GET["qd"]==""&&$_GET["qs"]=="")exit;
+// if 'qd' and 'qs' are both empty, exit
+if($_GET["qd"]=="" && $_GET["qs"]=="") exit;
+else {
 // if 'qd' is empty, set it to '.*'(match any character(s))
-else if($_GET["qd"]=="")$_GET["qd"]=".*";
+  if($_GET["qd"]=="")$_GET["qd"]=".*";
 // if 'qs' is empty, set it to '.*'(match any character(s))
-else if($_GET["qs"]=="")$_GET["qs"]=".*";
-
-// convert id to school name
-function getSchoolName($id,$row,$pdo){
-  $stmt_school = $pdo->prepare("SELECT name FROM schoolData WHERE id=?");
-  // get the first three digits
-  $schoolid = substr($row["id"],0,3);
-  $stmt_school->execute(array($schoolid));
-  $schoolname = $stmt_school->fetchAll()[0]["name"];
-  return $schoolname;
+  if($_GET["qs"]=="")$_GET["qs"]=".*";
 }
 
 //convert to formatted string
@@ -29,6 +21,7 @@ $table_class = array(
   "採計"=>"s6",
   "二階"=>"s7"
 );
+
 function getFormatted($str){
   // echo "<script>console.log('".$str."');</script>";
   if(array_key_exists($str,$GLOBALS["table_class"]))
@@ -39,12 +32,6 @@ function getFormatted($str){
 ?>
 
 <div class="container">
-  <?php
-  // serach for data whose name is regexly match
-  $stmt_apply = $pdo_apply->prepare("SELECT id,name,chinese,math,english,society,science
-                               FROM applyData WHERE name REGEXP ?;");
-  $stmt_apply->execute(array($_GET["qd"]));
-  ?>
   <table id="table_result" class="table">
     <thead class="thead-light">
       <tr>
@@ -57,28 +44,29 @@ function getFormatted($str){
         <th width="10%" class="subject">自然</th>
       </tr>
     </thead>
-
+    <?php
+    // search for data whose name and schoolname are regexly match
+    $stmt_apply = $pdo_apply->prepare("SELECT id,name,chinese,math,english,society,science,school
+                                       FROM applyData WHERE name REGEXP ? AND school REGEXP ?;");
+    $stmt_apply->execute(array($_GET["qd"],$_GET["qs"]));
+    ?>
     <!-- loop through every rows which match regex and fliter schoolname -->
-    <?php $cnt = 0; ?>
     <?php foreach ($stmt_apply->fetchAll() as $row):?>
-      <?php $schoolname = getSchoolName($row["id"],$row,$pdo_apply);?>
-      <?php if(preg_match("/".$_GET["qs"]."/",$schoolname)):?>
-        <tr>
-          <td class='td_default'><?php echo $schoolname?></td>
-          <td class='td_default'>
-            <!-- link to cac -->
-            <a href="<?php echo 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_'.$row['id'].'.htm'?>"
-               target="_blank">
-              <?php echo $row["name"]?>
-            </a>
-          </td>
-          <?php echo getFormatted($row["chinese"])?>
-          <?php echo getFormatted($row["english"])?>
-          <?php echo getFormatted($row["math"])?>
-          <?php echo getFormatted($row["society"])?>
-          <?php echo getFormatted($row["science"])?>
-        </tr>
-      <?php endif;?>
+      <tr>
+        <td class='td_default'><?php echo $row["school"]?></td>
+        <td class='td_default'>
+          <!-- link to cac -->
+          <a href="<?php echo 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_'.$row['id'].'.htm'?>"
+             target="_blank">
+            <?php echo $row["name"]?>
+          </a>
+        </td>
+        <?php echo getFormatted($row["chinese"])?>
+        <?php echo getFormatted($row["english"])?>
+        <?php echo getFormatted($row["math"])?>
+        <?php echo getFormatted($row["society"])?>
+        <?php echo getFormatted($row["science"])?>
+      </tr>
     <?php endforeach;?>
   </table>
 </div>
