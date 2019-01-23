@@ -35,50 +35,48 @@ function getFormatted($str){
 }
 ?>
 
-<div class="container">
-  <table id="table_result" class="table">
-    <thead class="thead-light">
-      <tr>
-        <th width="20%" class="align-middle">學校</th>
-        <th width="30%" class="align-middle">科系</th>
-        <th width="10%" class="subject align-middle">國文</th>
-        <th width="10%" class="subject align-middle">英文</th>
-        <th width="10%" class="subject align-middle">數學</th>
-        <th width="10%" class="subject align-middle">社會</th>
-        <th width="10%" class="subject align-middle">自然</th>
-      </tr>
-    </thead>
-    <?php
-    // search for data whose name and schoolname are regexly match
-    $stmt_apply = $pdo_apply->prepare("SELECT id,name,chinese,math,english,society,science,school
-                                       FROM applyData WHERE name REGEXP ? AND school REGEXP ?;");
-    try{
-      $stmt_apply->execute(array($qd,$qs));
-    }
-    catch(Exception $e){
-      exit;
-    }
-    ?>
-    <!-- loop through every rows which match regex and fliter schoolname -->
-    <?php foreach ($stmt_apply->fetchAll() as $row):?>
-      <tr>
-        <td class='td_default align-middle'><?php echo $row["school"]?></td>
-        <td class='td_default align-middle'>
-          <!-- link to cac -->
-          <a href="<?php echo 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_'.$row['id'].'.htm'?>"
-             target="_blank">
-            <?php echo $row["name"]?>
-          </a>
-        </td>
-        <?php echo getFormatted($row["chinese"])?>
-        <?php echo getFormatted($row["english"])?>
-        <?php echo getFormatted($row["math"])?>
-        <?php echo getFormatted($row["society"])?>
-        <?php echo getFormatted($row["science"])?>
-      </tr>
-    <?php endforeach;?>
-  </table>
-</div>
+<table id="table_result" class="table">
+  <thead class="thead-light">
+    <tr>
+      <th width="20%" class="align-middle">學校</th>
+      <th width="30%" class="align-middle">科系</th>
+      <th width="10%" class="subject align-middle">國文</th>
+      <th width="10%" class="subject align-middle">英文</th>
+      <th width="10%" class="subject align-middle">數學</th>
+      <th width="10%" class="subject align-middle">社會</th>
+      <th width="10%" class="subject align-middle">自然</th>
+    </tr>
+  </thead>
+  <?php
+  // search for data whose name and schoolname are regexly match
+  $stmt_apply = $pdo_apply->prepare("SELECT id,name,chinese,math,english,society,science,school
+                                     FROM applyData WHERE name REGEXP ? AND school REGEXP ?;");
+  try{
+    $stmt_apply->execute(array($qd,$qs));
+  }
+  catch(Exception $e){
+    exit;
+  }
+  ?>
+  <!-- loop through every rows which match regex and fliter schoolname -->
+  <?php foreach ($stmt_apply->fetchAll() as $row):?>
+  <tr>
+    <td class='td_default align-middle'><?php echo $row["school"]?></td>
+    <td class='td_default align-middle'>
+      <!-- link to cac -->
+      <a href="<?php echo 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_'.$row['id'].'.htm'?>"
+         target="_blank">
+        <?php echo $row["name"]?>
+      </a>
+    </td>
+    <?php echo getFormatted($row["chinese"])?>
+    <?php echo getFormatted($row["english"])?>
+    <?php echo getFormatted($row["math"])?>
+    <?php echo getFormatted($row["society"])?>
+    <?php echo getFormatted($row["science"])?>
+  </tr>
+  <?php endforeach;?>
+</table>
 
 <script>
 if($(window).width()<768){
