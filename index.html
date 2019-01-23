@@ -22,7 +22,7 @@
     if($(window).width()<768){
       $("#btn_advanced").text("進階");
       $("#text_advanced").html("不採計：<br>")
-      $(".subject").each(function(){
+      $(".subject-title").each(function(){
         var str=$(this).text().substring(0,1);
         $(this).text(str);
       });

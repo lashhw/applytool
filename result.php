@@ -34,10 +34,10 @@ $table_class = array(
 function getFormatted($str){
   // echo "<script>console.log('".$str."');</script>";
   if(array_key_exists($str,$GLOBALS["table_class"]))
-    return sprintf("<td class='align-middle %s'>%s</td>"
+    return sprintf("<td class='subject align-middle %s'>%s</td>"
                     ,$GLOBALS["table_class"][$str],$str);
   else
-    return "<td class='align-middle td_default'></td>";
+    return "<td class='subject align-middle td_default'></td>";
 }
 ?>
 
@@ -46,11 +46,11 @@ function getFormatted($str){
     <tr>
       <th width="20%" class="align-middle">學校</th>
       <th width="30%" class="align-middle">科系</th>
-      <th width="10%" id="t1" class="subject align-middle">國文</th>
-      <th width="10%" id="t2" class="subject align-middle">英文</th>
-      <th width="10%" id="t3" class="subject align-middle">數學</th>
-      <th width="10%" id="t4" class="subject align-middle">社會</th>
-      <th width="10%" id="t5" class="subject align-middle">自然</th>
+      <th width="10%" id="t1" class="subject subject-title align-middle">國文</th>
+      <th width="10%" id="t2" class="subject subject-title align-middle">英文</th>
+      <th width="10%" id="t3" class="subject subject-title align-middle">數學</th>
+      <th width="10%" id="t4" class="subject subject-title align-middle">社會</th>
+      <th width="10%" id="t5" class="subject subject-title align-middle">自然</th>
     </tr>
   </thead>
   <?php
