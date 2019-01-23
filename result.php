@@ -29,7 +29,8 @@ $table_class = array(
 function getFormatted($str){
   // echo "<script>console.log('".$str."');</script>";
   if(array_key_exists($str,$GLOBALS["table_class"]))
-    return "<td class='subject align-middle ".$GLOBALS["table_class"][$str]."'>".$str."</td>";
+    return sprintf("<td class='subject align-middle %s'>%s</td>"
+                    ,$GLOBALS["table_class"][$str],$str);
   else
     return "<td class='subject align-middle td_default'></td>";
 }
@@ -64,7 +65,7 @@ function getFormatted($str){
     <td class='td_default align-middle'><?php echo $row["school"]?></td>
     <td class='td_default align-middle'>
       <!-- link to cac -->
-      <a href="<?php echo 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_'.$row['id'].'.htm'?>"
+      <a href="<?php printf("https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_%s.htm",$row["id"])?>"
          target="_blank">
         <?php echo $row["name"]?>
       </a>
