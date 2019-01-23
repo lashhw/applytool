@@ -34,10 +34,10 @@ $table_class = array(
 function getFormatted($str){
   // echo "<script>console.log('".$str."');</script>";
   if(array_key_exists($str,$GLOBALS["table_class"]))
-    return sprintf("<td class='subject align-middle %s'>%s</td>"
+    return sprintf("<td class='align-middle %s'>%s</td>"
                     ,$GLOBALS["table_class"][$str],$str);
   else
-    return "<td class='subject align-middle td_default'></td>";
+    return "<td class='align-middle td_default'></td>";
 }
 ?>
 
