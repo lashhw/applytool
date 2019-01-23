@@ -81,7 +81,7 @@ function getFormatted($str){
 </div>
 
 <script>
-if($(window).width()<=768){
+if($(window).width()<768){
   $(".subject").each(function(){
     var str=$(this).text().substring(0,1);
     $(this).text(str);
