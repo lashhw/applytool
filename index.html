@@ -13,26 +13,51 @@
   <link rel="stylesheet" href="style.css?v=1">
 
   <script>
+  function processText(){
+    // add strikethrough on subjects which is filtered
+    for(var i=1;i<=5;i++)
+      if($("#check"+i).is(":checked"))$("#t"+i).css({"text-decoration-line" : "line-through",
+                                                     "text-decoration-color" : "DarkRed"});
+    // reduce text length on small devices
+    if($(window).width()<768){
+      $("#btn_advanced").text("進階");
+      $("#text_advanced").html("不採計：<br>")
+      $(".subject").each(function(){
+        var str=$(this).text().substring(0,1);
+        $(this).text(str);
+      });
+    }
+  }
   // search funtion; uses ajax to process the result.
   function search(){
     $.ajax({
       type: "POST",
-      data: {qd: $("#qd")[0].value, qs: $("#qs")[0].value},
+      data: {
+        qd: $("#qd").val(),
+        qs: $("#qs").val(),
+        f1: $("#check1").is(":checked"),
+        f2: $("#check2").is(":checked"),
+        f3: $("#check3").is(":checked"),
+        f4: $("#check4").is(":checked"),
+        f5: $("#check5").is(":checked"),
+      },
       url: "result.php",
       beforeSend: function() {
         // show loading spinner
         $(".loading").show();
       },
       success: function(data) {
+        $("#result").hide();
         $("#result").html(data);
+        processText();
+        $("#result").show();
         // hide loading spinner
         $(".loading").hide();
       }
     });
   }
-
+  // auto search when the page is fully loaded
   $(document).ready(function(){
-    // auto search when the page is loaded
     search();
   });
   </script>
@@ -54,10 +79,37 @@
       </div>
       <input type="text" class="form-control" id="qs" placeholder="學校名稱" value="" oninput="search()">
       <div class="input-group-append">
+        <button id="btn_advanced" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#advanced_filter">進階選項</button>
+      </div>
+      <div class="input-group-append">
         <button class="btn btn-primary" onclick="search()">
           <span class="spinner-border spinner-border-sm loading" role="status" aria-hidden="true"></span>
           搜尋
         </button>
+      </div>
+    </div>
+    <!-- select subject to filter -->
+    <div id="advanced_filter" class="collapse float-sm-right">
+      <span id="text_advanced">不採計：</span>
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" id="check1" class="custom-control-input" onclick="search()">
+        <label class="custom-control-label subject" for="check1">國文</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" id="check2" class="custom-control-input" onclick="search()">
+        <label class="custom-control-label subject" for="check2">英文</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" id="check3" class="custom-control-input" onclick="search()">
+        <label class="custom-control-label subject" for="check3">數學</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" id="check4" class="custom-control-input" onclick="search()">
+        <label class="custom-control-label subject" for="check4">社會</label>
+      </div>
+      <div class="custom-control custom-checkbox custom-control-inline">
+        <input type="checkbox" id="check5" class="custom-control-input" onclick="search()">
+        <label class="custom-control-label subject" for="check5">自然</label>
       </div>
     </div>
     <!-- the location to place the result table -->
