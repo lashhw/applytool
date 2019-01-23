@@ -16,7 +16,7 @@
   // search funtion; uses ajax to process the result.
   function search(){
     $.ajax({
-      type: "GET",
+      type: "POST",
       data: {qd: $("#qd")[0].value, qs: $("#qs")[0].value},
       url: "result.php",
       beforeSend: function() {

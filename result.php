@@ -1,14 +1,18 @@
 <?php
-//config file
+// config file
 require "config.php";
 
+// if either qd or qs is not set, change it to empty string
+isset($_POST["qd"]) ? $qd=$_POST["qd"] : $qd="";
+isset($_POST["qs"]) ? $qs=$_POST["qs"] : $qs="";
+
 // if 'qd' and 'qs' are both empty, exit
-if($_GET["qd"]=="" && $_GET["qs"]=="") exit;
+if($qd==""&&$qs=="") exit;
 else {
 // if 'qd' is empty, set it to '.*'(match any character(s))
-  if($_GET["qd"]=="")$_GET["qd"]=".*";
+  if($qd=="")$qd=".*";
 // if 'qs' is empty, set it to '.*'(match any character(s))
-  if($_GET["qs"]=="")$_GET["qs"]=".*";
+  if($qs=="")$qs=".*";
 }
 
 //convert to formatted string
@@ -49,7 +53,7 @@ function getFormatted($str){
     $stmt_apply = $pdo_apply->prepare("SELECT id,name,chinese,math,english,society,science,school
                                        FROM applyData WHERE name REGEXP ? AND school REGEXP ?;");
     try{
-      $stmt_apply->execute(array($_GET["qd"],$_GET["qs"]));
+      $stmt_apply->execute(array($qd,$qs));
     }
     catch(Exception $e){
       exit;
