@@ -68,9 +68,10 @@ function getFormatted($str){
   catch(Exception $e){
     exit;
   }
+  $result = $stmt_apply->fetchAll();
   ?>
   <!-- loop through every rows which match regex and fliter schoolname -->
-  <?php foreach ($stmt_apply->fetchAll() as $row):?>
+  <?php foreach ($result as $row):?>
   <tr>
     <td class='td_default align-middle'><?php echo $row["school"]?></td>
     <td class='td_default align-middle'>
