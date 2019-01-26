@@ -13,6 +13,9 @@
   table-layout: fixed;
   word-wrap: break-word;
 }
+.subject{
+  text-align: center;
+}
 .s1{
   background-color: #ccff99;
 }
