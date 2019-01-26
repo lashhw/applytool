@@ -30,34 +30,7 @@
   //     });
   //   }
   // }
-  // search funtion; uses ajax to process the result.
-  // function update(){
-  //   $.ajax({
-  //     type: "GET",
-  //     data: {
-  //       qd: $("#qd").val(),
-  //       qs: $("#qs").val(),
-  //       f1: $("#check1").is(":checked"),
-  //       f2: $("#check2").is(":checked"),
-  //       f3: $("#check3").is(":checked"),
-  //       f4: $("#check4").is(":checked"),
-  //       f5: $("#check5").is(":checked"),
-  //     },
-  //     url: "result.html",
-  //     beforeSend: function() {
-  //       // show loading spinner
-  //       $(".loading").show();
-  //     },
-  //     success: function(data) {
-  //       // $("#result").hide();
-  //       $("#result").html(data);
-  //       // processText();
-  //       // $("#result").show();
-  //       // hide loading spinner
-  //       $(".loading").hide();
-  //     }
-  //   });
-  // }
+
   // auto search when the page is fully loaded
   $(document).ready(function(){
     getData();
@@ -82,7 +55,7 @@
       </div>
       <input type="text" class="form-control" id="qs" placeholder="學校名稱" value="" oninput="update();" maxlength="30">
       <div class="input-group-append">
-        <button id="btn_advanced" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#advanced_filter">進階選項</button>
+        <button id="btn_advanced" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#advanced_options">進階選項</button>
       </div>
       <div class="input-group-append">
         <button class="btn btn-primary" onclick="update()">
@@ -92,28 +65,37 @@
       </div>
     </div>
     <!-- select subject to filter -->
-    <div id="advanced_filter" class="collapse float-sm-right">
-      <span id="text_advanced">不採計：</span>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" id="check1" class="custom-control-input" onclick="update()">
-        <label class="custom-control-label subject-title" for="check1">國文</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" id="check2" class="custom-control-input" onclick="update()">
-        <label class="custom-control-label subject-title" for="check2">英文</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" id="check3" class="custom-control-input" onclick="update()">
-        <label class="custom-control-label subject-title" for="check3">數學</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" id="check4" class="custom-control-input" onclick="update()">
-        <label class="custom-control-label subject-title" for="check4">社會</label>
-      </div>
-      <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" id="check5" class="custom-control-input" onclick="update()">
-        <label class="custom-control-label subject-title" for="check5">自然</label>
-      </div>
+    <div id="advanced_options" class="collapse float-sm-right">
+      <label for="s1">國文：</label>
+      <select id="s1" onchange="update()">
+        <option value="1">不限</option>
+        <option value="2">採計</option>
+        <option value="3">不採計</option>
+      </select>
+      <label for="s2">&nbsp;英文：</label>
+      <select id="s2" onchange="update()">
+        <option value="1">不限</option>
+        <option value="2">採計</option>
+        <option value="3">不採計</option>
+      </select>
+      <label for="s3">&nbsp;數學：</label>
+      <select id="s3" onchange="update()">
+        <option value="1">不限</option>
+        <option value="2">採計</option>
+        <option value="3">不採計</option>
+      </select>
+      <label for="s4">&nbsp;社會：</label>
+      <select id="s4" onchange="update()">
+        <option value="1">不限</option>
+        <option value="2">採計</option>
+        <option value="3">不採計</option>
+      </select>
+      <label for="s5">&nbsp;自然：</label>
+      <select id="s5" onchange="update()">
+        <option value="1">不限</option>
+        <option value="2">採計</option>
+        <option value="3">不採計</option>
+      </select>
     </div>
     <!-- the location to place the result table -->
     <div class="container">

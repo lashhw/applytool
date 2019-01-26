@@ -23,10 +23,11 @@ function search(qd, qs, c){
 
   var results = [];
   for(var i=0; i<data.length; i++){
-    if(data[i]['name'].toLowerCase().indexOf(qd)>=0 && data[i]['school'].toLowerCase().indexOf(qs)>=0){
+    if(data[i]['name'].toLowerCase().indexOf(qd.toLowerCase())>=0 && data[i]['school'].toLowerCase().indexOf(qs.toLowerCase())>=0){
       var flag = true;
       for(var j=0; j<5; j++){
-        if(data[i][subjects[j]]!='--' && c[j]) flag = false;
+        if(data[i][subjects[j]]=='--' && c[j]=='2') flag = false;
+        if(data[i][subjects[j]]!='--' && c[j]=='3') flag = false;
       }
       if(flag) results.push(data[i]);
     }
@@ -46,12 +47,11 @@ function update(){
 
   // clear table
   $('#result_content').empty();
-
-  var results = search($('#qd').val(), $('#qs').val(), [$("#check1").is(":checked"),
-                                                        $("#check2").is(":checked"),
-                                                        $("#check3").is(":checked"),
-                                                        $("#check4").is(":checked"),
-                                                        $("#check5").is(":checked")]);
+  var results = search($('#qd').val(), $('#qs').val(), [$('#s1').val(),
+                                                        $('#s2').val(),
+                                                        $('#s3').val(),
+                                                        $('#s4').val(),
+                                                        $('#s5').val()]);
   var content = '';
   for(var i=0; i<results.length; i++){
     var url = "https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_" + results[i]['id'] + ".htm";
