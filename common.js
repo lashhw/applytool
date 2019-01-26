@@ -90,6 +90,9 @@ function update(){
       var str=$(this).text().substring(0,2);
       $(this).text(str);
     });
+    for(var i=1; i<=5;i++){
+      $('#sel'+i).removeClass("custom-select");
+    }
   }
 
   $(".loading").hide();
