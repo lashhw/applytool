@@ -13,30 +13,6 @@
   <link rel="stylesheet" href="style.css?v=1">
   <!-- search.js -->
   <script src="search.js"></script>
-
-  <script>
-  // function processText(){
-  //   // add strikethrough on subjects which is filtered
-  //   for(var i=1;i<=5;i++)
-  //     if($("#check"+i).is(":checked"))$("#t"+i).css({"text-decoration-line" : "line-through",
-  //                                                    "text-decoration-color" : "DarkRed"});
-  //   // reduce text length on small devices
-  //   if($(window).width()<768){
-  //     $("#btn_advanced").text("進階");
-  //     $("#text_advanced").html("不採計：<br>")
-  //     $(".subject-title").each(function(){
-  //       var str=$(this).text().substring(0,1);
-  //       $(this).text(str);
-  //     });
-  //   }
-  // }
-
-  // auto search when the page is fully loaded
-  $(document).ready(function(){
-    getData();
-    update();
-  });
-  </script>
 </head>
 <body>
   <!-- title bar -->
@@ -65,42 +41,52 @@
       </div>
     </div>
     <!-- select subject to filter -->
-    <div id="advanced_options" class="collapse float-sm-right">
-      <label for="s1">國文：</label>
-      <select id="s1" onchange="update()">
-        <option value="1" selected="selected">不限</option>
-        <option value="2">採計</option>
-        <option value="3">不採計</option>
-      </select>
-      <label for="s2">&nbsp;英文：</label>
-      <select id="s2" onchange="update()">
-        <option value="1" selected="selected">不限</option>
-        <option value="2">採計</option>
-        <option value="3">不採計</option>
-      </select>
-      <label for="s3">&nbsp;數學：</label>
-      <select id="s3" onchange="update()">
-        <option value="1" selected="selected">不限</option>
-        <option value="2">採計</option>
-        <option value="3">不採計</option>
-      </select>
-      <label for="s4">&nbsp;社會：</label>
-      <select id="s4" onchange="update()">
-        <option value="1" selected="selected">不限</option>
-        <option value="2">採計</option>
-        <option value="3">不採計</option>
-      </select>
-      <label for="s5">&nbsp;自然：</label>
-      <select id="s5" onchange="update()">
-        <option value="1" selected="selected">不限</option>
-        <option value="2">採計</option>
-        <option value="3">不採計</option>
-      </select>
+    <div id="advanced_options" class="collapse float-sm-right form-inline">
+      <div class="form-group">
+        <label for="s1" class="option-title">&nbsp;國文：</label>
+        <select id="s1" onchange="update()">
+          <option value="1" selected="selected">不限</option>
+          <option value="2">採計</option>
+          <option value="3">不採計</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="s2" class="option-title">&nbsp;英文：</label>
+        <select id="s2" onchange="update()">
+          <option value="1" selected="selected">不限</option>
+          <option value="2">採計</option>
+          <option value="3">不採計</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="s3" class="option-title">&nbsp;數學：</label>
+        <select id="s3" onchange="update()">
+          <option value="1" selected="selected">不限</option>
+          <option value="2">採計</option>
+          <option value="3">不採計</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="s4" class="option-title">&nbsp;社會：</label>
+        <select id="s4" onchange="update()">
+          <option value="1" selected="selected">不限</option>
+          <option value="2">採計</option>
+          <option value="3">不採計</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="s5" class="option-title">&nbsp;自然：</label>
+        <select id="s5" onchange="update()">
+          <option value="1" selected="selected">不限</option>
+          <option value="2">採計</option>
+          <option value="3">不採計</option>
+        </select>
+      </div>
     </div>
     <!-- the location to place the result table -->
-    <div class="container">
+    <div id="table_result">
       <table class="table">
-        <thead>
+        <thead class="thead-light">
           <tr>
             <th width="20%" class="align-middle">學校</th>
             <th width="30%" class="align-middle">科系</th>

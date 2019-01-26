@@ -66,5 +66,36 @@ function update(){
   }
   $('#result_content').append(content);
 
+  // add strikethrough on subjects which is filtered
+  for(var i=1;i<=5;i++){
+    if($("#s"+i).val() == '1')$("#t"+i).css({"text-decoration-line": "",
+                                             "text-decoration-color": "",
+                                             "color": "black"});
+    if($("#s"+i).val() == '2')$("#t"+i).css({"text-decoration-line": "underline",
+                                             "text-decoration-color": "Green",
+                                             "color": "green"});
+    if($("#s"+i).val() == '3')$("#t"+i).css({"text-decoration-line": "line-through",
+                                             "text-decoration-color": "DarkRed",
+                                             "color": "darkred"});
+  }
+  // reduce text length on small devices
+  if($(window).width()<768){
+    $("#btn_advanced").text("進階");
+    $(".subject-title").each(function(){
+      var str=$(this).text().substring(0,1);
+      $(this).text(str);
+    });
+    $(".option-title").each(function(){
+      var str=$(this).text().substring(0,2);
+      $(this).text(str);
+    });
+  }
+
   $(".loading").hide();
 }
+
+// auto search when the page is fully loaded
+$(document).ready(function(){
+  getData();
+  update();
+});
