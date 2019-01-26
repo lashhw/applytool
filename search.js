@@ -23,7 +23,9 @@ function search(qd, qs, c){
 
   var results = [];
   for(var i=0; i<data.length; i++){
-    if(data[i]['name'].toLowerCase().indexOf(qd.toLowerCase())>=0 && data[i]['school'].toLowerCase().indexOf(qs.toLowerCase())>=0){
+    var regex_qd = new RegExp(qd,'i');
+    var regex_qs = new RegExp(qs,'i');
+    if(regex_qd.test(data[i]['name']) && regex_qs.test(data[i]['school'])){
       var flag = true;
       for(var j=0; j<5; j++){
         if(data[i][subjects[j]]=='--' && c[j]=='2') flag = false;
