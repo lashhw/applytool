@@ -5,60 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>申請入學採計科目篩選器</title>
-  <!-- boostrap,jquery,popper.js and custom css -->
+  <!-- bootstrap,jquery,popper.js and custom css -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="style.css?v=1">
+  <!-- search.js -->
+  <script src="search.js"></script>
 
   <script>
-  function processText(){
-    // add strikethrough on subjects which is filtered
-    for(var i=1;i<=5;i++)
-      if($("#check"+i).is(":checked"))$("#t"+i).css({"text-decoration-line" : "line-through",
-                                                     "text-decoration-color" : "DarkRed"});
-    // reduce text length on small devices
-    if($(window).width()<768){
-      $("#btn_advanced").text("進階");
-      $("#text_advanced").html("不採計：<br>")
-      $(".subject-title").each(function(){
-        var str=$(this).text().substring(0,1);
-        $(this).text(str);
-      });
-    }
-  }
+  // function processText(){
+  //   // add strikethrough on subjects which is filtered
+  //   for(var i=1;i<=5;i++)
+  //     if($("#check"+i).is(":checked"))$("#t"+i).css({"text-decoration-line" : "line-through",
+  //                                                    "text-decoration-color" : "DarkRed"});
+  //   // reduce text length on small devices
+  //   if($(window).width()<768){
+  //     $("#btn_advanced").text("進階");
+  //     $("#text_advanced").html("不採計：<br>")
+  //     $(".subject-title").each(function(){
+  //       var str=$(this).text().substring(0,1);
+  //       $(this).text(str);
+  //     });
+  //   }
+  // }
   // search funtion; uses ajax to process the result.
-  function search(){
-    $.ajax({
-      type: "POST",
-      data: {
-        qd: $("#qd").val(),
-        qs: $("#qs").val(),
-        f1: $("#check1").is(":checked"),
-        f2: $("#check2").is(":checked"),
-        f3: $("#check3").is(":checked"),
-        f4: $("#check4").is(":checked"),
-        f5: $("#check5").is(":checked"),
-      },
-      url: "result.php",
-      beforeSend: function() {
-        // show loading spinner
-        $(".loading").show();
-      },
-      success: function(data) {
-        $("#result").hide();
-        $("#result").html(data);
-        processText();
-        $("#result").show();
-        // hide loading spinner
-        $(".loading").hide();
-      }
-    });
-  }
+  // function update(){
+  //   $.ajax({
+  //     type: "GET",
+  //     data: {
+  //       qd: $("#qd").val(),
+  //       qs: $("#qs").val(),
+  //       f1: $("#check1").is(":checked"),
+  //       f2: $("#check2").is(":checked"),
+  //       f3: $("#check3").is(":checked"),
+  //       f4: $("#check4").is(":checked"),
+  //       f5: $("#check5").is(":checked"),
+  //     },
+  //     url: "result.html",
+  //     beforeSend: function() {
+  //       // show loading spinner
+  //       $(".loading").show();
+  //     },
+  //     success: function(data) {
+  //       // $("#result").hide();
+  //       $("#result").html(data);
+  //       // processText();
+  //       // $("#result").show();
+  //       // hide loading spinner
+  //       $(".loading").hide();
+  //     }
+  //   });
+  // }
   // auto search when the page is fully loaded
   $(document).ready(function(){
-    search();
+    getData();
+    update();
   });
   </script>
 </head>
@@ -73,16 +76,16 @@
   <!-- search form -->
   <div class="container">
     <div class="form-group input-group mb-3">
-      <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" oninput="search()">
+      <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" oninput="update();" maxlength="30">
       <div class="input-group-append">
         <span class="input-group-text">@</span>
       </div>
-      <input type="text" class="form-control" id="qs" placeholder="學校名稱" value="" oninput="search()">
+      <input type="text" class="form-control" id="qs" placeholder="學校名稱" value="" oninput="update();" maxlength="30">
       <div class="input-group-append">
         <button id="btn_advanced" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#advanced_filter">進階選項</button>
       </div>
       <div class="input-group-append">
-        <button class="btn btn-primary" onclick="search()">
+        <button class="btn btn-primary" onclick="update()">
           <span class="spinner-border spinner-border-sm loading" role="status" aria-hidden="true"></span>
           搜尋
         </button>
@@ -92,28 +95,45 @@
     <div id="advanced_filter" class="collapse float-sm-right">
       <span id="text_advanced">不採計：</span>
       <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" id="check1" class="custom-control-input" onclick="search()">
+        <input type="checkbox" id="check1" class="custom-control-input" onclick="update()">
         <label class="custom-control-label subject-title" for="check1">國文</label>
       </div>
       <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" id="check2" class="custom-control-input" onclick="search()">
+        <input type="checkbox" id="check2" class="custom-control-input" onclick="update()">
         <label class="custom-control-label subject-title" for="check2">英文</label>
       </div>
       <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" id="check3" class="custom-control-input" onclick="search()">
+        <input type="checkbox" id="check3" class="custom-control-input" onclick="update()">
         <label class="custom-control-label subject-title" for="check3">數學</label>
       </div>
       <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" id="check4" class="custom-control-input" onclick="search()">
+        <input type="checkbox" id="check4" class="custom-control-input" onclick="update()">
         <label class="custom-control-label subject-title" for="check4">社會</label>
       </div>
       <div class="custom-control custom-checkbox custom-control-inline">
-        <input type="checkbox" id="check5" class="custom-control-input" onclick="search()">
+        <input type="checkbox" id="check5" class="custom-control-input" onclick="update()">
         <label class="custom-control-label subject-title" for="check5">自然</label>
       </div>
     </div>
     <!-- the location to place the result table -->
-    <div id="result"></div>
+    <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="20%" class="align-middle">學校</th>
+            <th width="30%" class="align-middle">科系</th>
+            <th width="10%" id="t1" class="subject subject-title align-middle">國文</th>
+            <th width="10%" id="t2" class="subject subject-title align-middle">英文</th>
+            <th width="10%" id="t3" class="subject subject-title align-middle">數學</th>
+            <th width="10%" id="t4" class="subject subject-title align-middle">社會</th>
+            <th width="10%" id="t5" class="subject subject-title align-middle">自然</th>
+          </tr>
+        </thead>
+        <tbody id="result_content">
+
+        </tbody>
+      </table>
+    </div>
     <!-- loading spinner -->
     <div class="text-center loading">
       <div class="spinner-border text-secondary" role="status">
