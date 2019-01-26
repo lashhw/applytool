@@ -2,6 +2,5 @@
 ## Contents
 - [Intro](#Intro)
 - [Features](#Features)
-- [Installation](#Installation)
 ## Intro
 ## Features
