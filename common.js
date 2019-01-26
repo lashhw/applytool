@@ -49,11 +49,12 @@ function update(){
 
   // clear table
   $('#result_content').empty();
-  var results = search($('#qd').val(), $('#qs').val(), [$('#s1').val(),
-                                                        $('#s2').val(),
-                                                        $('#s3').val(),
-                                                        $('#s4').val(),
-                                                        $('#s5').val()]);
+
+  var results = search($('#qd').val(), $('#qs').val(), [$('#sel1').val(),
+                                                        $('#sel2').val(),
+                                                        $('#sel3').val(),
+                                                        $('#sel4').val(),
+                                                        $('#sel5').val()]);
   var content = '';
   for(var i=0; i<results.length; i++){
     var url = "https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_" + results[i]['id'] + ".htm";
@@ -68,15 +69,15 @@ function update(){
 
   // add strikethrough on subjects which is filtered
   for(var i=1;i<=5;i++){
-    if($("#s"+i).val() == '1')$("#t"+i).css({"text-decoration-line": "",
-                                             "text-decoration-color": "",
-                                             "color": "black"});
-    if($("#s"+i).val() == '2')$("#t"+i).css({"text-decoration-line": "underline",
-                                             "text-decoration-color": "Green",
-                                             "color": "green"});
-    if($("#s"+i).val() == '3')$("#t"+i).css({"text-decoration-line": "line-through",
-                                             "text-decoration-color": "DarkRed",
-                                             "color": "darkred"});
+    if($("#sel"+i).val() == '1')$("#t"+i).css({"text-decoration-line": "",
+                                               "text-decoration-color": "",
+                                               "color": "black"});
+    if($("#sel"+i).val() == '2')$("#t"+i).css({"text-decoration-line": "underline",
+                                               "text-decoration-color": "green",
+                                               "color": "green"});
+    if($("#sel"+i).val() == '3')$("#t"+i).css({"text-decoration-line": "line-through",
+                                               "text-decoration-color": "darkred",
+                                               "color": "darkred"});
   }
   // reduce text length on small devices
   if($(window).width()<768){
@@ -94,7 +95,7 @@ function update(){
   $(".loading").hide();
 }
 
-// auto search when the page is fully loaded
+// get data and search automatically when the page is fully loaded
 $(document).ready(function(){
   getData();
   update();

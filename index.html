@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>申請入學採計科目篩選器</title>
-  <!-- bootstrap,jquery,popper.js and custom css -->
+  <!-- bootstrap,jquery and popper.js -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <!-- external css -->
   <link rel="stylesheet" href="style.css?v=1">
-  <!-- common.js -->
-  <script src="common.js"></script>
+  <!-- external js -->
+  <script src="common.js?v=1"></script>
 </head>
 <body>
   <!-- title bar -->
@@ -40,68 +41,66 @@
         </button>
       </div>
     </div>
-    <!-- select subject to filter -->
-    <div id="advanced_options" class="collapse float-sm-right form-inline">
+    <!-- advanced options -->
+    <div id="advanced_options" class="collapse float-sm-right form-inline mb-3">
       <div class="form-group">
-        <label for="s1" class="option-title">&nbsp;國文：</label>
-        <select id="s1" onchange="update()">
+        <label for="sel1" class="option-title">&nbsp;國文：</label>
+        <select id="sel1" class="custom-select" onchange="update()">
           <option value="1" selected="selected">不限</option>
           <option value="2">採計</option>
           <option value="3">不採計</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="s2" class="option-title">&nbsp;英文：</label>
-        <select id="s2" onchange="update()">
+        <label for="sel2" class="option-title">&nbsp;英文：</label>
+        <select id="sel2" class="custom-select" onchange="update()">
           <option value="1" selected="selected">不限</option>
           <option value="2">採計</option>
           <option value="3">不採計</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="s3" class="option-title">&nbsp;數學：</label>
-        <select id="s3" onchange="update()">
+        <label for="sel3" class="option-title">&nbsp;數學：</label>
+        <select id="sel3" class="custom-select" onchange="update()">
           <option value="1" selected="selected">不限</option>
           <option value="2">採計</option>
           <option value="3">不採計</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="s4" class="option-title">&nbsp;社會：</label>
-        <select id="s4" onchange="update()">
+        <label for="sel4" class="option-title">&nbsp;社會：</label>
+        <select id="sel4" class="custom-select" onchange="update()">
           <option value="1" selected="selected">不限</option>
           <option value="2">採計</option>
           <option value="3">不採計</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="s5" class="option-title">&nbsp;自然：</label>
-        <select id="s5" onchange="update()">
+        <label for="sel5" class="option-title">&nbsp;自然：</label>
+        <select id="sel5" class="custom-select" onchange="update()">
           <option value="1" selected="selected">不限</option>
           <option value="2">採計</option>
           <option value="3">不採計</option>
         </select>
       </div>
     </div>
-    <!-- the location to place the result table -->
-    <div id="table_result">
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th width="20%" class="align-middle">學校</th>
-            <th width="30%" class="align-middle">科系</th>
-            <th width="10%" id="t1" class="subject subject-title align-middle">國文</th>
-            <th width="10%" id="t2" class="subject subject-title align-middle">英文</th>
-            <th width="10%" id="t3" class="subject subject-title align-middle">數學</th>
-            <th width="10%" id="t4" class="subject subject-title align-middle">社會</th>
-            <th width="10%" id="t5" class="subject subject-title align-middle">自然</th>
-          </tr>
-        </thead>
-        <tbody id="result_content">
+    <!-- result table -->
+    <table class="table" id="table_result">
+      <thead class="thead-light">
+        <tr>
+          <th width="20%" class="align-middle">學校</th>
+          <th width="30%" class="align-middle">科系</th>
+          <th width="10%" id="t1" class="subject-title align-middle">國文</th>
+          <th width="10%" id="t2" class="subject-title align-middle">英文</th>
+          <th width="10%" id="t3" class="subject-title align-middle">數學</th>
+          <th width="10%" id="t4" class="subject-title align-middle">社會</th>
+          <th width="10%" id="t5" class="subject-title align-middle">自然</th>
+        </tr>
+      </thead>
+      <tbody id="result_content">
 
-        </tbody>
-      </table>
-    </div>
+      </tbody>
+    </table>
     <!-- loading spinner -->
     <div class="text-center loading">
       <div class="spinner-border text-secondary" role="status">
