@@ -18,13 +18,18 @@ function getData(){
   });
 }
 
-function search(qd, qs){
+function search(qd, qs, c){
   if(qd == '' && qs == '') return [];
 
   var results = [];
   for(var i=0; i<data.length; i++){
-    if(data[i]['name'].toLowerCase().indexOf(qd)>=0 && data[i]['school'].toLowerCase().indexOf(qs)>=0)
-      results.push(data[i]);
+    if(data[i]['name'].toLowerCase().indexOf(qd)>=0 && data[i]['school'].toLowerCase().indexOf(qs)>=0){
+      var flag = true;
+      for(var j=0; j<5; j++){
+        if(data[i][subjects[j]]!='--' && c[j]) flag = false;
+      }
+      if(flag) results.push(data[i]);
+    }
   }
   return results;
 }
@@ -42,7 +47,11 @@ function update(){
   // clear table
   $('#result_content').empty();
 
-  var results = search($('#qd').val(), $('#qs').val());
+  var results = search($('#qd').val(), $('#qs').val(), [$("#check1").is(":checked"),
+                                                        $("#check2").is(":checked"),
+                                                        $("#check3").is(":checked"),
+                                                        $("#check4").is(":checked"),
+                                                        $("#check5").is(":checked")]);
   var content = '';
   for(var i=0; i<results.length; i++){
     var url = "https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_" + results[i]['id'] + ".htm";
