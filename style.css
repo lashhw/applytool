@@ -1,12 +1,15 @@
-#title_text{
-  font-size: 3rem;
+h2{
+  font-size: 1.2rem;
 }
 @media (max-width: 768px){
   #table_result{
     font-size: 0.8rem;
   }
-  #title_text{
+  h1{
     font-size: 1.8rem;
+  }
+  h2{
+    font-size: 1.1rem;
   }
 }
 #table_result{
