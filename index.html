@@ -16,108 +16,114 @@
   <script src="common.js?v=2"></script>
 </head>
 <body>
-  <!-- title bar -->
-  <div class="jumbotron jumbotron-fluid">
+  <div class="content">
+    <!-- title bar -->
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <p id="title_text">申請入學採計科目篩選器</p>
+        <p>來看看你想讀的科系採計哪些科目吧！</p>
+      </div>
+    </div>
+    <!-- search form -->
     <div class="container">
-      <p id="title_text">申請入學採計科目篩選器</p>
-      <p>來看看你想讀的科系採計哪些科目吧！</p>
+      <div class="form-group input-group mb-3">
+        <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" oninput="update();" maxlength="30">
+        <div class="input-group-append">
+          <span class="input-group-text">@</span>
+        </div>
+        <input type="text" class="form-control" id="qs" placeholder="學校名稱" value="" oninput="update();" maxlength="30">
+        <div class="input-group-append">
+          <button id="btn_advanced" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#advanced_options">進階選項</button>
+        </div>
+        <div class="input-group-append">
+          <button class="btn btn-primary" onclick="update()">
+            <span class="spinner-border spinner-border-sm loading" role="status" aria-hidden="true"></span>
+            搜尋
+          </button>
+        </div>
+      </div>
+      <!-- advanced options -->
+      <div id="advanced_options" class="collapse float-sm-right form-inline mb-3">
+        <div class="form-group ml-2 mb-0">
+          <label for="sel1" class="subject-title">國文：</label>
+          <select id="sel1" class="custom-select" onchange="update()">
+            <option value="1" selected="selected">不限</option>
+            <option value="2">採計</option>
+            <option value="3">不採計</option>
+          </select>
+        </div>
+        <div class="form-group ml-2 mb-0">
+          <label for="sel2" class="subject-title">英文：</label>
+          <select id="sel2" class="custom-select" onchange="update()">
+            <option value="1" selected="selected">不限</option>
+            <option value="2">採計</option>
+            <option value="3">不採計</option>
+          </select>
+        </div>
+        <div class="form-group ml-2 mb-0">
+          <label for="sel3" class="subject-title">數學：</label>
+          <select id="sel3" class="custom-select" onchange="update()">
+            <option value="1" selected="selected">不限</option>
+            <option value="2">採計</option>
+            <option value="3">不採計</option>
+          </select>
+        </div>
+        <div class="form-group ml-2 mb-0">
+          <label for="sel4" class="subject-title">社會：</label>
+          <select id="sel4" class="custom-select" onchange="update()">
+            <option value="1" selected="selected">不限</option>
+            <option value="2">採計</option>
+            <option value="3">不採計</option>
+          </select>
+        </div>
+        <div class="form-group ml-2 mb-0">
+          <label for="sel5" class="subject-title">自然：</label>
+          <select id="sel5" class="custom-select" onchange="update()">
+            <option value="1" selected="selected">不限</option>
+            <option value="2">採計</option>
+            <option value="3">不採計</option>
+          </select>
+        </div>
+        <div class="form-group ml-2 mb-0">
+          <span class="ml-2" id="mode-title">搜尋模式：</span>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="mode-indexof" name="mode" class="custom-control-input" value="1" onchange="update()" checked="checked">
+            <label class="custom-control-label" for="mode-indexof">一般</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="mode-regex" name="mode" class="custom-control-input" value="2" onchange="update()">
+            <label class="custom-control-label" for="mode-regex">Regex</label>
+          </div>
+        </div>
+      </div>
+      <!-- result table -->
+      <table class="table" id="table_result">
+        <thead class="thead-light">
+          <tr>
+            <th width="20%" class="align-middle">學校</th>
+            <th width="30%" class="align-middle">科系</th>
+            <th width="10%" id="t1" class="subject subject-title align-middle">國文</th>
+            <th width="10%" id="t2" class="subject subject-title align-middle">英文</th>
+            <th width="10%" id="t3" class="subject subject-title align-middle">數學</th>
+            <th width="10%" id="t4" class="subject subject-title align-middle">社會</th>
+            <th width="10%" id="t5" class="subject subject-title align-middle">自然</th>
+          </tr>
+        </thead>
+        <tbody id="result_content">
+
+        </tbody>
+      </table>
+      <!-- loading spinner -->
+      <div class="text-center loading">
+        <div class="spinner-border text-secondary" role="status">
+          <span class="sr-only">載入中...</span>
+        </div>
+      </div>
     </div>
   </div>
-  <!-- search form -->
-  <div class="container">
-    <div class="form-group input-group mb-3">
-      <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" oninput="update();" maxlength="30">
-      <div class="input-group-append">
-        <span class="input-group-text">@</span>
-      </div>
-      <input type="text" class="form-control" id="qs" placeholder="學校名稱" value="" oninput="update();" maxlength="30">
-      <div class="input-group-append">
-        <button id="btn_advanced" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#advanced_options">進階選項</button>
-      </div>
-      <div class="input-group-append">
-        <button class="btn btn-primary" onclick="update()">
-          <span class="spinner-border spinner-border-sm loading" role="status" aria-hidden="true"></span>
-          搜尋
-        </button>
-      </div>
-    </div>
-    <!-- advanced options -->
-    <div id="advanced_options" class="collapse float-sm-right form-inline mb-3">
-      <div class="form-group ml-2 mb-0">
-        <label for="sel1" class="subject-title">國文：</label>
-        <select id="sel1" class="custom-select" onchange="update()">
-          <option value="1" selected="selected">不限</option>
-          <option value="2">採計</option>
-          <option value="3">不採計</option>
-        </select>
-      </div>
-      <div class="form-group ml-2 mb-0">
-        <label for="sel2" class="subject-title">英文：</label>
-        <select id="sel2" class="custom-select" onchange="update()">
-          <option value="1" selected="selected">不限</option>
-          <option value="2">採計</option>
-          <option value="3">不採計</option>
-        </select>
-      </div>
-      <div class="form-group ml-2 mb-0">
-        <label for="sel3" class="subject-title">數學：</label>
-        <select id="sel3" class="custom-select" onchange="update()">
-          <option value="1" selected="selected">不限</option>
-          <option value="2">採計</option>
-          <option value="3">不採計</option>
-        </select>
-      </div>
-      <div class="form-group ml-2 mb-0">
-        <label for="sel4" class="subject-title">社會：</label>
-        <select id="sel4" class="custom-select" onchange="update()">
-          <option value="1" selected="selected">不限</option>
-          <option value="2">採計</option>
-          <option value="3">不採計</option>
-        </select>
-      </div>
-      <div class="form-group ml-2 mb-0">
-        <label for="sel5" class="subject-title">自然：</label>
-        <select id="sel5" class="custom-select" onchange="update()">
-          <option value="1" selected="selected">不限</option>
-          <option value="2">採計</option>
-          <option value="3">不採計</option>
-        </select>
-      </div>
-      <div class="form-group ml-2 mb-0">
-        <span class="ml-2" id="mode-title">搜尋模式：</span>
-        <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="mode-indexof" name="mode" class="custom-control-input" value="1" onchange="update()" checked="checked">
-          <label class="custom-control-label" for="mode-indexof">一般</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="mode-regex" name="mode" class="custom-control-input" value="2" onchange="update()">
-          <label class="custom-control-label" for="mode-regex">Regex</label>
-        </div>
-      </div>
-    </div>
-    <!-- result table -->
-    <table class="table" id="table_result">
-      <thead class="thead-light">
-        <tr>
-          <th width="20%" class="align-middle">學校</th>
-          <th width="30%" class="align-middle">科系</th>
-          <th width="10%" id="t1" class="subject subject-title align-middle">國文</th>
-          <th width="10%" id="t2" class="subject subject-title align-middle">英文</th>
-          <th width="10%" id="t3" class="subject subject-title align-middle">數學</th>
-          <th width="10%" id="t4" class="subject subject-title align-middle">社會</th>
-          <th width="10%" id="t5" class="subject subject-title align-middle">自然</th>
-        </tr>
-      </thead>
-      <tbody id="result_content">
-
-      </tbody>
-    </table>
-    <!-- loading spinner -->
-    <div class="text-center loading">
-      <div class="spinner-border text-secondary" role="status">
-        <span class="sr-only">載入中...</span>
-      </div>
-    </div>
+  <div class="footer">
+    資料版本: <a href="data/data.json">20190126</a> |
+    <a href="https://github.com/jacky030607/apply-tool">GitHub</a>
   </div>
 </body>
 </html>
