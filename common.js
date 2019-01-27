@@ -18,14 +18,22 @@ function getData(){
   });
 }
 
-function search(qd, qs, c){
+function search(mode, qd, qs, c){
   if(qd == '' && qs == '') return [];
 
   var results = [];
   for(var i=0; i<data.length; i++){
-    var regex_qd = new RegExp(qd,'i');
-    var regex_qs = new RegExp(qs,'i');
-    if(regex_qd.test(data[i]['name']) && regex_qs.test(data[i]['school'])){
+    var test = false;
+    if(mode=='2'){
+      var regex_qd = new RegExp(qd,'i');
+      var regex_qs = new RegExp(qs,'i');
+      test = regex_qd.test(data[i]['name']) && regex_qs.test(data[i]['school']);
+    }
+    else{
+      test = data[i]['name'].toLowerCase().indexOf(qd.toLowerCase()) !== -1 &&
+             data[i]['school'].toLowerCase().indexOf(qs.toLowerCase()) !== -1;
+    }
+    if(test){
       var flag = true;
       for(var j=0; j<5; j++){
         if(data[i][subjects[j]]=='--' && c[j]=='2') flag = false;
@@ -49,12 +57,11 @@ function update(){
 
   // clear table
   $('#result_content').empty();
-
-  var results = search($('#qd').val(), $('#qs').val(), [$('#sel1').val(),
-                                                        $('#sel2').val(),
-                                                        $('#sel3').val(),
-                                                        $('#sel4').val(),
-                                                        $('#sel5').val()]);
+  var results = search($('input[name=mode]:checked').val(), $('#qd').val(), $('#qs').val(), [$('#sel1').val(),
+                                                                                             $('#sel2').val(),
+                                                                                             $('#sel3').val(),
+                                                                                             $('#sel4').val(),
+                                                                                             $('#sel5').val()]);
   var content = '';
   for(var i=0; i<results.length; i++){
     var url = "https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_" + results[i]['id'] + ".htm";
@@ -81,21 +88,19 @@ function update(){
   }
   // reduce text length on small devices
   if($(window).width()<768){
-    $("#btn_advanced").text("進階");
+    $("#btn_advanced").text('進階');
+    $("#mode-title").text('模式');
+    $("#mode-title").removeClass('ml-2');
     $(".subject-title").each(function(){
       var str=$(this).text().substring(0,1);
       $(this).text(str);
     });
-    $(".option-title").each(function(){
-      var str=$(this).text().substring(0,2);
-      $(this).text(str);
-    });
     for(var i=1; i<=5;i++){
-      $('#sel'+i).removeClass("custom-select");
+      $('#sel'+i).removeClass('custom-select');
     }
   }
 
-  $(".loading").hide();
+  $('.loading').hide();
 }
 
 // get data and search automatically when the page is fully loaded
