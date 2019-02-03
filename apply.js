@@ -12,7 +12,7 @@ var subject_index = {
 };
 
 function getData(){
-  $.getJSON('data/data.json', function(json_data) {
+  $.getJSON('data/apply/data.json', function(json_data) {
     for(var x in json_data)
       data.push(json_data[x]);
   });
@@ -53,8 +53,6 @@ function getFormatted(str){
 }
 
 function update(){
-  $(".loading").show();
-
   // clear table
   $('#result_content').empty();
   var results = search($('input[name=mode]:checked').val(), $('#qd').val(), $('#qs').val(), [$('#sel1').val(),
@@ -99,8 +97,6 @@ function update(){
       $('#sel'+i).removeClass('custom-select');
     }
   }
-
-  $('.loading').hide();
 }
 
 // get data and search automatically when the page is fully loaded
