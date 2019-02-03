@@ -76,7 +76,7 @@ function update(){
   for(var i=1;i<=5;i++){
     if($("#sel"+i).val() == '1')$("#t"+i).css({"text-decoration-line": "",
                                                "text-decoration-color": "",
-                                               "color": "black"});
+                                               "color": ""});
     if($("#sel"+i).val() == '2')$("#t"+i).css({"text-decoration-line": "underline",
                                                "text-decoration-color": "green",
                                                "color": "green"});
@@ -101,6 +101,7 @@ function update(){
 
 // get data and search automatically when the page is fully loaded
 $(document).ready(function(){
+  $('#table_result').floatThead();
   getData();
   update();
 });
