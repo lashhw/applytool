@@ -67,7 +67,7 @@ function update(){
     var url = "https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_" + results[i]['id'] + ".htm";
     content += '<tr>';
     content += '<td>' + results[i]['school'] + '</td>';
-    content += "<td><a href='" + url + "'>" + results[i]['name'] + '</a></td>';
+    content += "<td><a href='" + url + "' target='_blank'>" + results[i]['name'] + '</a></td>';
     for(var j=0; j<subjects.length; j++)
       content += getFormatted(results[i][subjects[j]]);
     content += '</tr>';
