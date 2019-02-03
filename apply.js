@@ -12,7 +12,7 @@ var subject_index = {
 };
 
 function getData(){
-  $.getJSON('data/data.json', function(json_data) {
+  $.getJSON('data/apply/data.json', function(json_data) {
     for(var x in json_data)
       data.push(json_data[x]);
   });
@@ -53,8 +53,6 @@ function getFormatted(str){
 }
 
 function update(){
-  $(".loading").show();
-
   // clear table
   $('#result_content').empty();
   var results = search($('input[name=mode]:checked').val(), $('#qd').val(), $('#qs').val(), [$('#sel1').val(),
@@ -78,7 +76,7 @@ function update(){
   for(var i=1;i<=5;i++){
     if($("#sel"+i).val() == '1')$("#t"+i).css({"text-decoration-line": "",
                                                "text-decoration-color": "",
-                                               "color": "black"});
+                                               "color": ""});
     if($("#sel"+i).val() == '2')$("#t"+i).css({"text-decoration-line": "underline",
                                                "text-decoration-color": "green",
                                                "color": "green"});
@@ -99,12 +97,11 @@ function update(){
       $('#sel'+i).removeClass('custom-select');
     }
   }
-
-  $('.loading').hide();
 }
 
 // get data and search automatically when the page is fully loaded
 $(document).ready(function(){
+  $('#table_result').floatThead();
   getData();
   update();
 });

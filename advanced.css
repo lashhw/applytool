@@ -1,16 +1,8 @@
+.jumbotron{
+  background-color: #e9ecef !important
+}
 h2{
   font-size: 1.2rem;
-}
-@media (max-width: 768px){
-  #table_result{
-    font-size: 0.8rem;
-  }
-  h1{
-    font-size: 1.4rem;
-  }
-  h2{
-    font-size: 1rem;
-  }
 }
 #table_result{
   table-layout: fixed;
@@ -19,26 +11,11 @@ h2{
 .subject{
   text-align: center;
 }
-.s1{
-  background-color: #ccff99;
+.gsat{
+  background-color: #ffffcc;
 }
-.s2{
-  background-color: #e6ff99;
-}
-.s3{
-  background-color: #ffffb3;
-}
-.s4{
-  background-color: #ffe699;
-}
-.s5{
-  background-color: #ffcc99;
-}
-.s6{
-  background-color: #e6ffff;
-}
-.s7{
-  background-color: #ffe6f2;
+.advanced{
+  background-color: #ffff99;
 }
 html {
     height: 100%;
