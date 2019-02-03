@@ -1,0 +1,43 @@
+.jumbotron{
+  background-color: #e9ecef !important
+}
+
+h2{
+  font-size: 1.2rem;
+}
+
+#table_result{
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+.subject{
+  text-align: center;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+}
+
+.footer {
+  padding: 0.7rem;
+  color: rgb(128, 128, 128);
+  font-size: 0.9rem;
+  background-color: #efefef;
+  text-align: center;
+}
+
+.footer > a {
+  color: rgb(128, 128, 128);
+  font-weight: bold;
+}
