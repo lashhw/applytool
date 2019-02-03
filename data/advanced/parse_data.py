@@ -28,10 +28,7 @@ subjects_gsat_dict = {
 
 def normalize(str):
     str = unicodedata.normalize("NFKD", str)
-    str = str.replace('x','')
-    str = str.replace('.','')
     str = str.replace(' ','')
-    str = ''.join([i for i in str if not i.isdigit()]) # remove numbers
     return str
 
 def normalize_list(l):
@@ -62,9 +59,9 @@ for idx, id in enumerate(id_all):
     tds_tr1 = soup_tr1.find_all("td")
     tds_tr3 = soup_tr3.find_all("td")
     # get subjects
-    subjects = tds_tr1[2].get_text().split('\n')
-    subjects = normalize_list(subjects)
-    subjects = [subjects_dict[x] for x in subjects]
+    tmp_list = tds_tr1[2].get_text().split('\n')
+    tmp_list = normalize_list(tmp_list)
+    subjects = {subjects_dict[x.split('x')[0]]:x.split('x')[1] for x in tmp_list}
     # get gsat subjects
     tmp_list = tds_tr1[1].get_text().split('\n') + tds_tr3[0].get_text().split('\n')
     tmp_list = normalize_list(tmp_list)
