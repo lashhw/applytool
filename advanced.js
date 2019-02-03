@@ -45,8 +45,8 @@ function update(){
     content += "<td class='align-middle' rowspan='2'>" + results[i]['school'] + '</td>';
     content += "<td class='align-middle' rowspan='2'><a href='" + url + "' target='_blank'>" + results[i]['name'] + '</a></td>';
     for(var j=0; j<subjects.length; j++){
-      if(results[i]['subjects'].indexOf(subjects[j]) !== -1)
-        content += getFormatted('採計', 1, 'advanced');
+      if(subjects[j] in results[i]['subjects'])
+        content += getFormatted('x'+results[i]['subjects'][subjects[j]], 1, 'advanced');
       else {
         content += getFormatted('--', 1, '');
       }
@@ -67,7 +67,9 @@ function update(){
 
 // get data and search automatically when the page is fully loaded
 $(document).ready(function(){
-  $('#table_result').floatThead();
+  $('#table_result').floatThead({
+    position: 'absolute'
+  });
   getData();
   update();
 });

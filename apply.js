@@ -101,7 +101,9 @@ function update(){
 
 // get data and search automatically when the page is fully loaded
 $(document).ready(function(){
-  $('#table_result').floatThead();
+  $('#table_result').floatThead({
+    position: 'absolute'
+  });
   getData();
   update();
 });
