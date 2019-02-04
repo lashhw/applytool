@@ -1,7 +1,14 @@
 "use strict";
 var data = [];
 var subjects = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11'];
-var subjects_gsat = ['s1', 's2', 's3', 's4', 's5', 's6'];
+var subjects_gsat = {
+  's1': 2,
+  's2': 2,
+  's3': 2,
+  's4': 2,
+  's5': 2,
+  's6': 1
+};
 
 function getData(){
   $.getJSON('data/advanced/data.json', function(json_data) {
@@ -52,12 +59,11 @@ function update(){
       }
     }
     content += '</tr><tr>';
-    for(var j=0; j<subjects_gsat.length; j++){
-      console.log(results[i]['subjects_gsat']);
-      if(subjects_gsat[j] in results[i]['subjects_gsat'])
-        content += getFormatted(results[i]['subjects_gsat'][subjects_gsat[j]], 2, 'gsat');
+    for(var j in subjects_gsat) {
+      if(j in results[i]['subjects_gsat'])
+        content += getFormatted(results[i]['subjects_gsat'][j], subjects_gsat[j], 'gsat');
       else {
-        content += getFormatted('--', 2, '');
+        content += getFormatted('--', subjects_gsat[j], '');
       }
     }
     content += '</tr>'
