@@ -79,12 +79,13 @@ function update(){
 
 // get data and search automatically when the page is fully loaded
 $(document).ready(function(){
-  $('#table_result').floatThead({
-    position: 'fixed'
-  });
+  $('#table_result').floatThead();
   $('#advanced_options').on('shown.bs.collapse hidden.bs.collapse', function () {
     $('#table_result').floatThead('reflow');
   });
+  if($(document).width()<768){
+    $("#btn_advanced").text('進階');
+  }
   getData();
   update();
 });
