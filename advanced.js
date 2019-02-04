@@ -73,9 +73,7 @@ function update(){
 
 // get data and search automatically when the page is fully loaded
 $(document).ready(function(){
-  $('#table_result').floatThead({
-    position: 'absolute'
-  });
+  $('#table_result').floatThead();
   getData();
   update();
 });
