@@ -12,6 +12,7 @@
   </script>
 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
   <meta name="description" content="還在苦惱要怎麼準備指考嗎？使用這個簡單的小工具，能讓你清楚了解你想讀的科系採計哪些科目。">
   <title>指考考試分發─採計科目查詢【108學年】</title>
@@ -39,12 +40,12 @@
   <div class="content">
     <!-- title bar -->
     <div class="jumbotron jumbotron-fluid">
-      <div class="ml-5 mr-5">
+      <div class="container">
         <h1>指考考試分發─採計科目查詢<span class="badge badge-secondary">108學年</span></h1>
         <h2>來看看你想讀的科系採計哪些科目吧！</h2>
       </div>
     </div>
-    <div class="ml-5 mr-5">
+    <div class="container">
     <!-- search form -->
       <div class="form-group input-group mb-3">
         <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" oninput="update();" maxlength="30">
@@ -76,11 +77,11 @@
         </div>
       </div>
       <!-- result table -->
-      <table class="table table-bordered" id="table_result">
+      <table class="table table-bordered table-sm" id="table_result">
         <thead class="thead-light">
           <tr>
-            <th style="width:15%" class="align-middle" rowspan="2">學校</th>
-            <th style="width:20%" class="align-middle" rowspan="2">科系</th>
+            <th id="school" class="align-middle" rowspan="2">學校</th>
+            <th id="name" class="align-middle" rowspan="2">科系</th>
             <th class="subject subject-title align-middle">國文</th>
             <th class="subject subject-title align-middle">英文</th>
             <th class="subject subject-title align-middle">數甲</th>

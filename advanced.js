@@ -52,19 +52,25 @@ function update(){
     content += "<td class='align-middle' rowspan='2'>" + results[i]['school'] + '</td>';
     content += "<td class='align-middle' rowspan='2'><a href='" + url + "' target='_blank'>" + results[i]['name'] + '</a></td>';
     for(var j=0; j<subjects.length; j++){
-      if(subjects[j] in results[i]['subjects'])
-        content += getFormatted('x'+results[i]['subjects'][subjects[j]], 1, 'advanced');
-      else {
-        content += getFormatted('--', 1, '');
+      if(subjects[j] in results[i]['subjects']){
+        if($(document).width()<768)
+          content += getFormatted("採", 1, 'advanced');
+        else
+          content += getFormatted('x'+results[i]['subjects'][subjects[j]], 1, 'advanced');
       }
+      else
+        content += getFormatted('--', 1, '');
     }
     content += '</tr><tr>';
     for(var j in subjects_gsat) {
-      if(j in results[i]['subjects_gsat'])
-        content += getFormatted(results[i]['subjects_gsat'][j], subjects_gsat[j], 'gsat');
-      else {
-        content += getFormatted('--', subjects_gsat[j], '');
+      if(j in results[i]['subjects_gsat']){
+          if($(document).width()<768)
+            content += getFormatted(results[i]['subjects_gsat'][j].substring(0,1), subjects_gsat[j], 'gsat');
+          else
+            content += getFormatted(results[i]['subjects_gsat'][j], subjects_gsat[j], 'gsat');
       }
+      else
+        content += getFormatted('--', subjects_gsat[j], '');
     }
     content += '</tr>'
   }
@@ -73,7 +79,12 @@ function update(){
 
 // get data and search automatically when the page is fully loaded
 $(document).ready(function(){
-  $('#table_result').floatThead();
+  $('#table_result').floatThead({
+    position: 'fixed'
+  });
+  $('#advanced_options').on('shown.bs.collapse hidden.bs.collapse', function () {
+    $('#table_result').floatThead('reflow');
+  });
   getData();
   update();
 });

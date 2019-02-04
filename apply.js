@@ -85,7 +85,7 @@ function update(){
                                                "color": "darkred"});
   }
   // reduce text length on small devices
-  if($(window).width()<768){
+  if($(document).width()<768){
     $("#btn_advanced").text('進階');
     $("#mode-title").text('模式');
     $("#mode-title").removeClass('ml-2');
@@ -102,6 +102,9 @@ function update(){
 // get data and search automatically when the page is fully loaded
 $(document).ready(function(){
   $('#table_result').floatThead();
+  $('#advanced_options').on('shown.bs.collapse hidden.bs.collapse', function () {
+    $('#table_result').floatThead('reflow');
+  });
   getData();
   update();
 });

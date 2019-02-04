@@ -1,12 +1,6 @@
-@media (max-width: 768px){
-  #table_result{
+@media (max-width: 767px){
+  table th,td{
     font-size: 0.8rem;
-  }
-  h1{
-    font-size: 1.4rem;
-  }
-  h2{
-    font-size: 1rem;
   }
 }
 
