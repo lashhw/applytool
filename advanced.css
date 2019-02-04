@@ -1,7 +1,20 @@
+@media (max-width: 1023px){
+  table th,td {
+    font-size: 0.7rem;
+  }
+}
+
 .gsat{
   background-color: #ccffcc;
 }
 
 .advanced{
   background-color: #ffff99;
+}
+
+#table_result #school {
+    width: 15%;
+}
+#table_result #name {
+    width: 20%;
 }
