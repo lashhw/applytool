@@ -85,6 +85,9 @@ $(document).ready(function(){
   $('#advanced_options').on('shown.bs.collapse hidden.bs.collapse', function () {
     $('#table_result').floatThead('reflow');
   });
+  if($(document).width()<768){
+    $("#btn_advanced").text('進階');
+  }
   getData();
   update();
 });
