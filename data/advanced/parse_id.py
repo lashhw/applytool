@@ -17,7 +17,8 @@ for groupid in range(GROUP_START,GROUP_END+1):
     soup = BeautifulSoup(rawhtml, 'html5lib')
     allTags = soup.select('td.t > a')
     for tag in allTags:
-        data.append(tag['href'][-10:-5])
+        id = tag['href'][-10:-5]
+        if(id not in data): data.append(id)
     print("ok!")
 f = open("id.json", "w")
 f.write(json.dumps(data))
