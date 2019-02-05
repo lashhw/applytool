@@ -86,13 +86,6 @@ function update(){
   }
   // reduce text length on small devices
   if($(document).width()<768){
-    $("#btn_advanced").text('進階');
-    $("#mode-title").text('模式');
-    $("#mode-title").removeClass('ml-2');
-    $(".subject-title").each(function(){
-      var str=$(this).text().substring(0,1);
-      $(this).text(str);
-    });
     for(var i=1; i<=5;i++){
       $('#sel'+i).removeClass('custom-select');
     }
@@ -105,6 +98,15 @@ $(document).ready(function(){
   $('#advanced_options').on('shown.bs.collapse hidden.bs.collapse', function () {
     $('#table_result').floatThead('reflow');
   });
+  if($(document).width()<768){
+    $("#btn_advanced").text('進階');
+    $("#mode-title").text('模式');
+    $("#mode-title").removeClass('ml-2');
+    $(".subject-title").each(function(){
+      var str=$(this).text().substring(0,1);
+      $(this).text(str);
+    });
+  }
   getData();
   update();
 });
