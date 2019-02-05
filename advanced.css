@@ -1,4 +1,4 @@
-@media (max-width: 1023px){
+@media screen and (max-width: 1023px){
   table th,td {
     font-size: 0.7rem;
   }
