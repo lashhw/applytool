@@ -84,12 +84,6 @@ function update(){
                                                "text-decoration-color": "darkred",
                                                "color": "darkred"});
   }
-  // reduce text length on small devices
-  if($(document).width()<768){
-    for(var i=1; i<=5;i++){
-      $('#sel'+i).removeClass('custom-select');
-    }
-  }
 }
 
 // get data and search automatically when the page is fully loaded
@@ -106,6 +100,9 @@ $(document).ready(function(){
       var str=$(this).text().substring(0,1);
       $(this).text(str);
     });
+    for(var i=1; i<=5;i++){
+      $('#sel'+i).removeClass('custom-select');
+    }
   }
   getData();
   update();
