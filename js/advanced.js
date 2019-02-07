@@ -1,5 +1,6 @@
 "use strict";
 var data = [];
+var results_per_query = 50;
 var subjects = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11'];
 var subjects_gsat = {
   's1': 2,
@@ -10,6 +11,16 @@ var subjects_gsat = {
   's6': 1
 };
 
+function init(){
+  $('#table_result').floatThead();
+  $('#advanced_options').on('shown.bs.collapse hidden.bs.collapse', function () {
+    $('#table_result').floatThead('reflow');
+  });
+  if($(document).width()<768){
+    $("#btn_advanced").text('進階');
+  }
+}
+
 function getData(){
   $.getJSON('data/advanced/data.json', function(json_data) {
     for(var x in json_data)
@@ -17,11 +28,13 @@ function getData(){
   });
 }
 
-function search(mode, qd, qs){
-  if(qd == '' && qs == '') return [];
+function search(mode, qd, qs, start){
+  if(qd == '' && qs == '') return [false, []];
 
   var results = [];
-  for(var i=0; i<data.length; i++){
+  var cnt = 0;
+  for(var i=start; i<data.length; i++){
+    if(cnt == results_per_query) return [i, results];
     var test = false;
     if(mode=='2'){
       var regex_qd = new RegExp(qd,'i');
@@ -32,19 +45,19 @@ function search(mode, qd, qs){
       test = data[i]['name'].toLowerCase().indexOf(qd.toLowerCase()) !== -1 &&
              data[i]['school'].toLowerCase().indexOf(qs.toLowerCase()) !== -1;
     }
-    if(test) results.push(data[i]);
+    if(test){
+      results.push(data[i]);
+      cnt++;
+    }
   }
-  return results;
+  return [false, results];
 }
 
 function getFormatted(str, colspan, additional_class){
   return "<td class='subject align-middle " + additional_class + "' colspan='" + colspan + "'>" + str + "</td>";
 }
 
-function update(){
-  // clear table
-  $('#result_content').empty();
-  var results = search($('input[name=mode]:checked').val(), $('#qd').val(), $('#qs').val());
+function update_table(results){
   var content = '';
   for(var i=0; i<results.length; i++){
     var url = "https://campus4.ncku.edu.tw/uac/cross_search/dept_info/" + results[i]['id'] + ".html";
@@ -77,15 +90,30 @@ function update(){
   $('#result_content').append(content);
 }
 
+function update(start){
+  if(typeof start === 'undefined'){
+    $('#result_content').empty();
+    start = 0;
+  }
+  var tmp = search($('input[name=mode]:checked').val(), $('#qd').val(), $('#qs').val(), start);
+  var next_start = tmp[0];
+  var results = tmp[1];
+  update_table(results);
+  if(next_start !== false) {
+    $('#more-results').removeClass('d-none')
+                      .off('click')
+                      .click(function(){
+                        update(next_start)
+                      });
+  }
+  else {
+    $('#more-results').addClass('d-none');
+  }
+}
+
 // get data and search automatically when the page is fully loaded
 $(document).ready(function(){
-  $('#table_result').floatThead();
-  $('#advanced_options').on('shown.bs.collapse hidden.bs.collapse', function () {
-    $('#table_result').floatThead('reflow');
-  });
-  if($(document).width()<768){
-    $("#btn_advanced").text('進階');
-  }
+  init();
   getData();
   update();
 });
