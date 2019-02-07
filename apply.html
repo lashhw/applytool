@@ -32,7 +32,7 @@
 </head>
 <body>
   <div class="content">
-    <nav class="navbar navbar-expand navbar-light"  style="background-color: #e9ecef;">
+    <nav class="navbar navbar-expand navbar-light" style="background-color: #e9ecef;">
       <div class="navbar-nav">
         <a class="nav-item nav-link" href="/">首頁</a>
         <a class="nav-item nav-link active" href="apply.html">個人申請</a>
@@ -46,9 +46,9 @@
         <h2>來看看你想讀的科系採計哪些科目吧！</h2>
       </div>
     </div>
-    <!-- search form -->
     <div class="container">
-      <div class="form-group input-group mb-3">
+      <!-- search form -->
+      <div class="input-group mb-3">
         <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" oninput="update();" maxlength="30">
         <input type="text" class="form-control" id="qs" placeholder="學校名稱" value="" oninput="update();" maxlength="30">
         <div class="input-group-append">
@@ -101,7 +101,7 @@
           </select>
         </div>
         <div class="form-group mb-0">
-          <span class="ml-2" id="mode-title">搜尋模式：</span>
+          <span id="mode-title">搜尋模式：</span>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" id="mode-indexof" name="mode" class="custom-control-input" value="1" onchange="update()" checked="checked">
             <label class="custom-control-label" for="mode-indexof">一般</label>
