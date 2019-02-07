@@ -93,9 +93,7 @@ $(document).ready(function(){
     $('#table_result').floatThead('reflow');
   });
   if($(document).width()<768){
-    $("#btn_advanced").text('進階');
     $("#mode-title").text('模式');
-    $("#mode-title").removeClass('ml-2');
     $(".subject-title").each(function(){
       var str=$(this).text().substring(0,1);
       $(this).text(str);
