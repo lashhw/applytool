@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="css/common.css?v=1">
   <link rel="stylesheet" href="css/advanced.css?v=1">
   <!-- external js -->
-  <script src="js/advanced.js?v=1"></script>
+  <script src="js/advanced.js?v=2"></script>
 </head>
 <body>
   <nav class="navbar navbar-expand navbar-light" style="background-color: #e9ecef;">
@@ -47,7 +47,7 @@
       </div>
     </div>
     <div class="container">
-    <!-- search form -->
+      <!-- search form -->
       <div class="form-group input-group mb-3">
         <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" oninput="update();" maxlength="30">
         <div class="input-group-append">
@@ -55,7 +55,9 @@
         </div>
         <input type="text" class="form-control" id="qs" placeholder="學校名稱" value="" oninput="update();" maxlength="30">
         <div class="input-group-append">
-          <button id="btn_advanced" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#advanced_options">進階選項</button>
+          <button id="btn_advanced" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#advanced_options">
+            <span class="d-none d-md-inline">進階</span>選項
+          </button>
         </div>
         <div class="input-group-append">
           <button class="btn btn-primary" onclick="update()">
@@ -83,31 +85,35 @@
           <tr>
             <th id="school" class="align-middle" rowspan="2">學校</th>
             <th id="name" class="align-middle" rowspan="2">科系</th>
-            <th class="subject subject-title align-middle">國文</th>
-            <th class="subject subject-title align-middle">英文</th>
-            <th class="subject subject-title align-middle">數甲</th>
-            <th class="subject subject-title align-middle">物理</th>
-            <th class="subject subject-title align-middle">化學</th>
-            <th class="subject subject-title align-middle">生物</th>
-            <th class="subject subject-title align-middle">數乙</th>
-            <th class="subject subject-title align-middle">歷史</th>
-            <th class="subject subject-title align-middle">地理</th>
-            <th class="subject subject-title align-middle">公民</th>
-            <th class="subject subject-title align-middle">術科</th>
+            <th class="subject align-middle">國文</th>
+            <th class="subject align-middle">英文</th>
+            <th class="subject align-middle">數甲</th>
+            <th class="subject align-middle">物理</th>
+            <th class="subject align-middle">化學</th>
+            <th class="subject align-middle">生物</th>
+            <th class="subject align-middle">數乙</th>
+            <th class="subject align-middle">歷史</th>
+            <th class="subject align-middle">地理</th>
+            <th class="subject align-middle">公民</th>
+            <th class="subject align-middle">術科</th>
           </tr>
           <tr>
-            <th class="subject subject-title align-middle" colspan="2">學測國文</th>
-            <th class="subject subject-title align-middle" colspan="2">學測英文</th>
-            <th class="subject subject-title align-middle" colspan="2">學測數學</th>
-            <th class="subject subject-title align-middle" colspan="2">學測社會</th>
-            <th class="subject subject-title align-middle" colspan="2">學測自然</th>
-            <th class="subject subject-title align-middle">英聽</th>
+            <th class="subject align-middle" colspan="2">學測國文</th>
+            <th class="subject align-middle" colspan="2">學測英文</th>
+            <th class="subject align-middle" colspan="2">學測數學</th>
+            <th class="subject align-middle" colspan="2">學測社會</th>
+            <th class="subject align-middle" colspan="2">學測自然</th>
+            <th class="subject align-middle">英聽</th>
           </tr>
         </thead>
         <tbody id="result_content">
 
         </tbody>
       </table>
+      <button type="button" class="btn btn-primary btn-block d-none mb-3" id="more-results">更多結果</button>
+      <p style="text-align: center">
+        本查詢結果僅供參考，實際內容以正式簡章為主。
+      </p>
     </div>
   </div>
   <div class="footer">
