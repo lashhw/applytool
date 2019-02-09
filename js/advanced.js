@@ -85,6 +85,7 @@ function update_table(results){
     content += '</tr>'
   }
   $('#result_content').append(content);
+  $('#table_result').floatThead('reflow');
 }
 
 function update(start){
