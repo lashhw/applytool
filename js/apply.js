@@ -71,6 +71,7 @@ function update(){
     content += '</tr>';
   }
   $('#result_content').append(content);
+  $('#table_result').floatThead('reflow');
 
   // add strikethrough on subjects which is filtered
   for(var i=1;i<=5;i++){
