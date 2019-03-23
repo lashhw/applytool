@@ -44,6 +44,7 @@ body {
   font-size: 0.9rem;
   background-color: #e9ecef;
   text-align: center;
+  white-space: nowrap;
 }
 .footer > a {
   color: rgb(128, 128, 128);
