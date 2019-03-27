@@ -16,6 +16,7 @@ function init(){
   $('#advanced_options').on('shown.bs.collapse hidden.bs.collapse', function () {
     $('#table_result').floatThead('reflow');
   });
+  $('[data-toggle="tooltip"]').tooltip();
 }
 
 function getData(){

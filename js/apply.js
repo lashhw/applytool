@@ -103,6 +103,7 @@ $(document).ready(function(){
       $('#sel'+i).removeClass('custom-select');
     }
   }
+  $('[data-toggle="tooltip"]').tooltip();
   getData();
   update();
 });

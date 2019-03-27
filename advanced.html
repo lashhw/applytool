@@ -25,10 +25,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.1.3/jquery.floatThead.min.js"></script>
   <!-- external css -->
-  <link rel="stylesheet" href="css/common.css?v=3">
+  <link rel="stylesheet" href="css/common.css?v=4">
   <link rel="stylesheet" href="css/advanced.css?v=2">
   <!-- external js -->
-  <script src="js/advanced.js?v=3"></script>
+  <script src="js/advanced.js?v=4"></script>
 </head>
 <body>
   <div class="content">
@@ -68,7 +68,11 @@
           </div>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" id="mode-regex" name="mode" class="custom-control-input" value="2" onchange="update()">
-            <label class="custom-control-label" for="mode-regex">Regex</label>
+            <label class="custom-control-label" for="mode-regex">
+              <span href="#" data-toggle="tooltip" data-placement="bottom" title="例如「^醫學」代表「搜尋開頭為醫學的科系」">
+                <u class="dotted">Regex</u>
+              </span>
+            </label>
           </div>
         </div>
       </div>
