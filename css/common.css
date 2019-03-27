@@ -8,6 +8,11 @@ h2 {
   font-size: 1.2rem;
 }
 
+u.dotted{
+  border-bottom: 1px dashed #999;
+  text-decoration: none;
+}
+
 .jumbotron {
   background-color: #e9ecef !important;
 }
