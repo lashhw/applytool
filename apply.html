@@ -28,7 +28,8 @@
   <link rel="stylesheet" href="css/common.css?v=4">
   <link rel="stylesheet" href="css/apply.css?v=1">
   <!-- external js -->
-  <script src="js/apply.js?v=3"></script>
+  <script src="js/common.js?v=1"></script>
+  <script src="js/apply.js?v=4"></script>
 </head>
 <body>
   <div class="content">
@@ -59,7 +60,7 @@
         </div>
       </div>
       <!-- advanced options -->
-      <div id="advanced_options" class="collapse float-right form-inline mb-3">
+      <div id="advanced_options" class="collapse float-right form-inline mb-1">
         <div class="form-group mr-2 mb-0">
           <label for="sel1" class="subject-title">國文：</label>
           <select id="sel1" class="custom-select" onchange="update()">
@@ -133,6 +134,7 @@
 
         </tbody>
       </table>
+      <button type="button" class="btn btn-primary btn-block d-none mb-3" id="more-results">更多結果</button>
       <p style="text-align: center">
         本查詢結果僅供參考，實際內容以正式簡章為主。
       </p>

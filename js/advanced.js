@@ -1,9 +1,9 @@
+/* global search init getData isInSmallDevice */
 /* eslint-disable camelcase */
 'use strict'
-var data = []
-var resultsPerQuery = 50
-var subjects = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11']
-var subjects_gsat = {
+const resultsPerQuery = 50
+const subjects = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11']
+const subjects_gsat = {
   's1': 2,
   's2': 2,
   's3': 2,
@@ -11,46 +11,7 @@ var subjects_gsat = {
   's5': 2,
   's6': 1
 }
-
-function init () {
-  $('#table_result').floatThead()
-  $('#advanced_options').on('shown.bs.collapse hidden.bs.collapse', function () {
-    $('#table_result').floatThead('reflow')
-  })
-  $('[data-toggle="tooltip"]').tooltip()
-}
-
-function getData () {
-  $.getJSON('data/advanced/data.json', function (jsonData) {
-    for (var x in jsonData) {
-      data.push(jsonData[x])
-    }
-  })
-}
-
-function search (mode, qd, qs, start) {
-  if (qd === '' && qs === '') return [false, []]
-
-  var results = []
-  var cnt = 0
-  for (var i = start; i < data.length; i++) {
-    if (cnt === resultsPerQuery) return [i, results]
-    var test = false
-    if (mode === '2') {
-      var regexQd = new RegExp(qd, 'i')
-      var regexQs = new RegExp(qs, 'i')
-      test = regexQd.test(data[i]['name']) && regexQs.test(data[i]['school'])
-    } else {
-      test = data[i]['name'].toLowerCase().indexOf(qd.toLowerCase()) !== -1 &&
-             data[i]['school'].toLowerCase().indexOf(qs.toLowerCase()) !== -1
-    }
-    if (test) {
-      results.push(data[i])
-      cnt++
-    }
-  }
-  return [false, results]
-}
+var data = []
 
 function getFormatted (str, colspan, additionalClass) {
   return "<td class='subject align-middle " + additionalClass + "' colspan='" + colspan + "'>" + str + '</td>'
@@ -65,7 +26,7 @@ function updateTable (results) {
     content += "<td class='align-middle' rowspan='2'><a href='" + url + "' target='_blank'>" + results[i]['name'] + '</a></td>'
     for (var j = 0; j < subjects.length; j++) {
       if (subjects[j] in results[i]['subjects']) {
-        if ($(document).width() < 768) {
+        if (isInSmallDevice()) {
           content += getFormatted('採', 1, 'advanced')
         } else {
           content += getFormatted('x' + results[i]['subjects'][subjects[j]], 1, 'advanced')
@@ -77,7 +38,7 @@ function updateTable (results) {
     content += '</tr><tr>'
     for (var x in subjects_gsat) {
       if (x in results[i]['subjects_gsat']) {
-        if ($(document).width() < 768) {
+        if (isInSmallDevice()) {
           content += getFormatted(results[i]['subjects_gsat'][x].substring(0, 1), subjects_gsat[x], 'gsat')
         } else {
           content += getFormatted(results[i]['subjects_gsat'][x], subjects_gsat[x], 'gsat')
@@ -97,11 +58,13 @@ function update (start) {
     $('#result_content').empty()
     start = 0
   }
-  var tmp = search($('input[name=mode]:checked').val(), $('#qd').val(), $('#qs').val(), start)
+  var tmp = search(
+    data, $('input[name=mode]:checked').val(), $('#qd').val(), $('#qs').val(), resultsPerQuery, start
+  )
   var nextStart = tmp[0]
   var results = tmp[1]
   updateTable(results)
-  if (nextStart !== false) {
+  if (nextStart !== -1) {
     $('#more-results')
       .removeClass('d-none')
       .off('click')
@@ -118,6 +81,6 @@ function update (start) {
 // get data and search automatically when the page is fully loaded
 $(document).ready(function () {
   init()
-  getData()
+  data = getData('data/advanced/data.json')
   update()
 })
