@@ -14,34 +14,38 @@ const subjects_gsat = {
 var data = []
 
 function getFormatted (str, colspan, additionalClass) {
-  return "<td class='subject align-middle " + additionalClass + "' colspan='" + colspan + "'>" + str + '</td>'
+  return `<td class='subject align-middle ${additionalClass}' colspan='${colspan}'>${str}</td>`
 }
 
 function updateTable (results) {
   var content = ''
   for (var i = 0; i < results.length; i++) {
-    var url = 'https://campus4.ncku.edu.tw/uac/cross_search/dept_info/' + results[i]['id'] + '.html'
+    const r = results[i]
+    var url = `https://campus4.ncku.edu.tw/uac/cross_search/dept_info/${r['id']}.html`
+
     content += '<tr>'
-    content += "<td class='align-middle' rowspan='2'>" + results[i]['school'] + '</td>'
-    content += "<td class='align-middle' rowspan='2'><a href='" + url + "' target='_blank'>" + results[i]['name'] + '</a></td>'
+    content += `<td class='align-middle' rowspan='2'>${r['school']}</td>`
+    content += `<td class='align-middle' rowspan='2'><a href='${url}' target='_blank'>${r['name']}</a></td>`
     for (var j = 0; j < subjects.length; j++) {
-      if (subjects[j] in results[i]['subjects']) {
+      if (subjects[j] in r['subjects']) {
         if (isInSmallDevice()) {
           content += getFormatted('採', 1, 'advanced')
         } else {
-          content += getFormatted('x' + results[i]['subjects'][subjects[j]], 1, 'advanced')
+          content += getFormatted('x' + r['subjects'][subjects[j]], 1, 'advanced')
         }
       } else {
         content += getFormatted('--', 1, '')
       }
     }
-    content += '</tr><tr>'
+    content += '</tr>'
+
+    content += '<tr>'
     for (var x in subjects_gsat) {
-      if (x in results[i]['subjects_gsat']) {
+      if (x in r['subjects_gsat']) {
         if (isInSmallDevice()) {
-          content += getFormatted(results[i]['subjects_gsat'][x].substring(0, 1), subjects_gsat[x], 'gsat')
+          content += getFormatted(r['subjects_gsat'][x].substring(0, 1), subjects_gsat[x], 'gsat')
         } else {
-          content += getFormatted(results[i]['subjects_gsat'][x], subjects_gsat[x], 'gsat')
+          content += getFormatted(r['subjects_gsat'][x], subjects_gsat[x], 'gsat')
         }
       } else {
         content += getFormatted('--', subjects_gsat[x], '')

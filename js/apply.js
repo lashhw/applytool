@@ -22,11 +22,12 @@ function getFormatted (str) {
 function updateTable (results) {
   var content = ''
   for (var i = 0; i < results.length; i++) {
-    var url = 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_' + results[i]['id'] + '.htm'
+    const r = results[i]
+    var url = `https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_${r['id']}.htm`
     content += '<tr>'
-    content += '<td>' + results[i]['school'] + '</td>'
-    content += "<td><a href='" + url + "' target='_blank'>" + results[i]['name'] + '</a></td>'
-    for (var j = 0; j < subjects.length; j++) content += getFormatted(results[i][subjects[j]])
+    content += `<td>${r['school']}</td>`
+    content += `<td><a href='${url}' target='_blank'>${r['name']}</a></td>`
+    for (var j = 0; j < subjects.length; j++) content += getFormatted(r[subjects[j]])
     content += '</tr>'
   }
   $('#result_content').append(content)
