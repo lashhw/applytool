@@ -22,7 +22,7 @@ function getFormatted (str) {
 function updateTable (results) {
   var content = ''
   for (var i = 0; i < results.length; i++) {
-    const r = results[i]
+    var r = results[i]
     var url = `https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_${r['id']}.htm`
     content += '<tr>'
     content += `<td>${r['school']}</td>`
