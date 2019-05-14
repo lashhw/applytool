@@ -8,6 +8,14 @@ h2 {
   font-size: 1.2rem;
 }
 
+#filterTable {
+  max-width: 700px;
+}
+
+#filterTable th, td {
+  text-align: center;
+}
+
 u.dotted{
   border-bottom: 1px dashed #999;
   text-decoration: none;

@@ -4,6 +4,10 @@
   }
 }
 
+.fc {
+  cursor: pointer;
+}
+
 .s1{
   background-color: #ccff99;
 }

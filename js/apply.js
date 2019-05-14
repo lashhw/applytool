@@ -11,6 +11,21 @@ const subjectIndex = {
   '採計': 's6',
   '二階': 's7'
 }
+const ruleList = ['頂標', '前標', '均標', '後標', '底標', '採計', '二階', '--']
+var filter = [
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1]
+]
+var rule = [
+  ['頂標', '前標', '均標', '後標', '底標', '採計', '二階', '--'],
+  ['頂標', '前標', '均標', '後標', '底標', '採計', '二階', '--'],
+  ['頂標', '前標', '均標', '後標', '底標', '採計', '二階', '--'],
+  ['頂標', '前標', '均標', '後標', '底標', '採計', '二階', '--'],
+  ['頂標', '前標', '均標', '後標', '底標', '採計', '二階', '--']
+]
 var data = []
 
 function getFormatted (str) {
@@ -34,33 +49,16 @@ function updateTable (results) {
   $('#table_result').floatThead('reflow')
 }
 
-function getRule () {
-  const selVal = [
-    $('#sel1').val(),
-    $('#sel2').val(),
-    $('#sel3').val(),
-    $('#sel4').val(),
-    $('#sel5').val()
-  ]
-  var rule = []
-  for (var i = 0; i < selVal.length; i++) {
-    switch (selVal[i]) {
-      case '1':
-        rule[i] = ['頂標', '前標', '均標', '後標', '底標', '採計', '二階', '--']
-        break
-      case '2':
-        rule[i] = ['頂標', '前標', '均標', '後標', '底標', '採計', '二階']
-        break
-      case '3':
-        rule[i] = ['--']
-        break
+function updateRule () {
+  for (var i = 0; i < 5; i++) {
+    rule[i] = []
+    for (var j = 0; j < 8; j++) {
+      if (filter[i][j] === 1) rule[i].push(ruleList[j])
     }
   }
-  return rule
 }
 
 function update (start) {
-  const rule = getRule()
   if (typeof start === 'undefined') {
     $('#result_content').empty()
     start = 0
@@ -92,11 +90,26 @@ function update (start) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
+function changeFilter (id) {
+  var subject = id.split('-')[0]
+  var standard = id.split('-')[1]
+  if (filter[subject][standard] === 1) {
+    filter[subject][standard] = 0
+    $('#' + id).children().removeClass('oi-check')
+  } else if (filter[subject][standard] === 0) {
+    filter[subject][standard] = 1
+    $('#' + id).children().addClass('oi-check')
+  }
+  updateRule()
+  update()
+}
+
 // get data and search automatically when the page is fully loaded
 $(document).ready(function () {
   init()
   if (isInSmallDevice()) {
-    $('#mode-title').text('模式')
+    $('#mode-title').text('模式：')
     $('.subject-title').each(function () {
       var str = $(this).text().substring(0, 1)
       $(this).text(str)
