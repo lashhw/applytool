@@ -1,6 +1,1 @@
-# 申請入學採計科目篩選器
-## Contents
-- [Intro](#Intro)
-- [Features](#Features)
-## Intro
-## Features
+# 學測、指考查詢小工具
