@@ -51,7 +51,7 @@ for id in id_all:
             if d1 != '--':
                 data[cnt][subjects[s]] = d1
             elif d2 != '--':
-                data[cnt][subjects[s]] = '採計'
+                data[cnt][subjects[s]] = '一階'
             elif d3 != '--':
                 data[cnt][subjects[s]] = '二階'
             else:
@@ -64,7 +64,7 @@ for id in id_all:
                 sys.exit('Abbreviation "%s" is not found.' % c)
             s = abbr_dict[c]
             if data[cnt][subjects[s]] == '二階' or data[cnt][subjects[s]] == '--':
-                data[cnt][subjects[s]] = '採計'
+                data[cnt][subjects[s]] = '一階'
 
     cnt += 1
     print('ok!')
