@@ -1,9 +1,5 @@
 /* eslint-disable no-unused-vars */
 
-function isInSmallDevice () {
-  return $(document).width() < 768
-}
-
 function isInArray (value, array) {
   return array.indexOf(value) > -1
 }

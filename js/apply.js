@@ -80,11 +80,9 @@ function update (start) {
     $('#more-results')
       .removeClass('d-none')
       .off('click')
-      .click(
-        function () {
-          update(nextStart)
-        }
-      )
+      .click(function () {
+        update(nextStart)
+      })
   } else {
     $('#more-results').addClass('d-none')
   }

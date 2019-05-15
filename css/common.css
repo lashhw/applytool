@@ -10,9 +10,6 @@ h2 {
 
 #filterTable {
   max-width: 700px;
-}
-
-#filterTable th, td {
   text-align: center;
 }
 

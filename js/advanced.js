@@ -1,4 +1,4 @@
-/* global search init getData isInSmallDevice */
+/* global search init getData */
 /* eslint-disable camelcase */
 'use strict'
 const resultsPerQuery = 50
@@ -28,11 +28,12 @@ function updateTable (results) {
     content += `<td class='align-middle' rowspan='2'><a href='${url}' target='_blank'>${r['name']}</a></td>`
     for (var j = 0; j < subjects.length; j++) {
       if (subjects[j] in r['subjects']) {
-        if (isInSmallDevice()) {
-          content += getFormatted('採', 1, 'advanced')
-        } else {
-          content += getFormatted('x' + r['subjects'][subjects[j]], 1, 'advanced')
-        }
+        content += getFormatted(
+          `<span class='d-md-none'>採</span>
+           <span class='d-none d-md-inline'>x${r['subjects'][subjects[j]]}</span>`,
+          1,
+          'advanced'
+        )
       } else {
         content += getFormatted('--', 1, '')
       }
@@ -42,11 +43,12 @@ function updateTable (results) {
     content += '<tr>'
     for (var x in subjects_gsat) {
       if (x in r['subjects_gsat']) {
-        if (isInSmallDevice()) {
-          content += getFormatted(r['subjects_gsat'][x].substring(0, 1), subjects_gsat[x], 'gsat')
-        } else {
-          content += getFormatted(r['subjects_gsat'][x], subjects_gsat[x], 'gsat')
-        }
+        content += getFormatted(
+          `${r['subjects_gsat'][x].substring(0, 1)}
+           <span class='d-none d-md-inline'>${r['subjects_gsat'][x].substring(1, 2)}</span>`,
+          subjects_gsat[x],
+          'gsat'
+        )
       } else {
         content += getFormatted('--', subjects_gsat[x], '')
       }
@@ -72,11 +74,9 @@ function update (start) {
     $('#more-results')
       .removeClass('d-none')
       .off('click')
-      .click(
-        function () {
-          update(nextStart)
-        }
-      )
+      .click(function () {
+        update(nextStart)
+      })
   } else {
     $('#more-results').addClass('d-none')
   }
