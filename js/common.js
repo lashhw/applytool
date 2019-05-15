@@ -1,4 +1,3 @@
-/* eslint-disable no-extend-native */
 /* eslint-disable no-unused-vars */
 
 function isInSmallDevice () {
