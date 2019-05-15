@@ -1,4 +1,4 @@
-/* global search init getData isInSmallDevice */
+/* global search init getData */
 'use strict'
 const resultsPerQuery = 50
 const subjects = ['chinese', 'english', 'math', 'society', 'science']
@@ -108,16 +108,6 @@ function changeFilter (id) {
 // get data and search automatically when the page is fully loaded
 $(document).ready(function () {
   init()
-  if (isInSmallDevice()) {
-    $('#mode-title').text('模式：')
-    $('.subject-title').each(function () {
-      var str = $(this).text().substring(0, 1)
-      $(this).text(str)
-    })
-    for (var i = 1; i <= 5; i++) {
-      $('#sel' + i).addClass('custom-select-sm')
-    }
-  }
   data = getData('data/apply/data.json')
   update()
 })
