@@ -1,118 +1,90 @@
-"use strict";
-var data = [];
-var results_per_query = 50;
-var subjects = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11'];
-var subjects_gsat = {
+/* global search init getData */
+/* eslint-disable camelcase */
+'use strict'
+const resultsPerQuery = 50
+const subjects = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11']
+const subjects_gsat = {
   's1': 2,
   's2': 2,
   's3': 2,
   's4': 2,
   's5': 2,
   's6': 1
-};
+}
+var data = []
 
-function init(){
-  $('#table_result').floatThead();
-  $('#advanced_options').on('shown.bs.collapse hidden.bs.collapse', function () {
-    $('#table_result').floatThead('reflow');
-  });
-  $('[data-toggle="tooltip"]').tooltip();
+function getFormatted (str, colspan, additionalClass) {
+  return `<td class='subject align-middle ${additionalClass}' colspan='${colspan}'>${str}</td>`
 }
 
-function getData(){
-  $.getJSON('data/advanced/data.json', function(json_data) {
-    for(var x in json_data)
-      data.push(json_data[x]);
-  });
-}
+function updateTable (results) {
+  var content = ''
+  for (var i = 0; i < results.length; i++) {
+    const r = results[i]
+    var url = `https://campus4.ncku.edu.tw/uac/cross_search/dept_info/${r['id']}.html`
 
-function search(mode, qd, qs, start){
-  if(qd == '' && qs == '') return [false, []];
-
-  var results = [];
-  var cnt = 0;
-  for(var i=start; i<data.length; i++){
-    if(cnt == results_per_query) return [i, results];
-    var test = false;
-    if(mode=='2'){
-      var regex_qd = new RegExp(qd,'i');
-      var regex_qs = new RegExp(qs,'i');
-      test = regex_qd.test(data[i]['name']) && regex_qs.test(data[i]['school']);
-    }
-    else{
-      test = data[i]['name'].toLowerCase().indexOf(qd.toLowerCase()) !== -1 &&
-             data[i]['school'].toLowerCase().indexOf(qs.toLowerCase()) !== -1;
-    }
-    if(test){
-      results.push(data[i]);
-      cnt++;
-    }
-  }
-  return [false, results];
-}
-
-function getFormatted(str, colspan, additional_class){
-  return "<td class='subject align-middle " + additional_class + "' colspan='" + colspan + "'>" + str + "</td>";
-}
-
-function update_table(results){
-  var content = '';
-  for(var i=0; i<results.length; i++){
-    var url = "https://campus4.ncku.edu.tw/uac/cross_search/dept_info/" + results[i]['id'] + ".html";
-    content += '<tr>';
-    content += "<td class='align-middle' rowspan='2'>" + results[i]['school'] + '</td>';
-    content += "<td class='align-middle' rowspan='2'><a href='" + url + "' target='_blank'>" + results[i]['name'] + '</a></td>';
-    for(var j=0; j<subjects.length; j++){
-      if(subjects[j] in results[i]['subjects']){
-        if($(document).width()<768)
-          content += getFormatted("採", 1, 'advanced');
-        else
-          content += getFormatted('x'+results[i]['subjects'][subjects[j]], 1, 'advanced');
+    content += '<tr>'
+    content += `<td class='align-middle' rowspan='2'>${r['school']}</td>`
+    content += `<td class='align-middle' rowspan='2'><a href='${url}' target='_blank'>${r['name']}</a></td>`
+    for (var j = 0; j < subjects.length; j++) {
+      if (subjects[j] in r['subjects']) {
+        content += getFormatted(
+          `<span class='d-md-none'>採</span>
+           <span class='d-none d-md-inline'>x${r['subjects'][subjects[j]]}</span>`,
+          1,
+          'advanced'
+        )
+      } else {
+        content += getFormatted('--', 1, '')
       }
-      else
-        content += getFormatted('--', 1, '');
     }
-    content += '</tr><tr>';
-    for(var j in subjects_gsat) {
-      if(j in results[i]['subjects_gsat']){
-          if($(document).width()<768)
-            content += getFormatted(results[i]['subjects_gsat'][j].substring(0,1), subjects_gsat[j], 'gsat');
-          else
-            content += getFormatted(results[i]['subjects_gsat'][j], subjects_gsat[j], 'gsat');
+    content += '</tr>'
+
+    content += '<tr>'
+    for (var x in subjects_gsat) {
+      if (x in r['subjects_gsat']) {
+        content += getFormatted(
+          `${r['subjects_gsat'][x].substring(0, 1)}
+           <span class='d-none d-md-inline'>${r['subjects_gsat'][x].substring(1, 2)}</span>`,
+          subjects_gsat[x],
+          'gsat'
+        )
+      } else {
+        content += getFormatted('--', subjects_gsat[x], '')
       }
-      else
-        content += getFormatted('--', subjects_gsat[j], '');
     }
     content += '</tr>'
   }
-  $('#result_content').append(content);
-  $('#table_result').floatThead('reflow');
+  $('#result_content').append(content)
+  $('#table_result').floatThead('reflow')
 }
 
-function update(start){
-  if(typeof start === 'undefined'){
-    $('#result_content').empty();
-    start = 0;
+function update (start) {
+  if (typeof start === 'undefined') {
+    $('#result_content').empty()
+    start = 0
   }
-  var tmp = search($('input[name=mode]:checked').val(), $('#qd').val(), $('#qs').val(), start);
-  var next_start = tmp[0];
-  var results = tmp[1];
-  update_table(results);
-  if(next_start !== false) {
-    $('#more-results').removeClass('d-none')
-                      .off('click')
-                      .click(function(){
-                        update(next_start)
-                      });
-  }
-  else {
-    $('#more-results').addClass('d-none');
+  var tmp = search(
+    data, $('input[name=mode]:checked').val(), $('#qd').val(), $('#qs').val(), resultsPerQuery, start
+  )
+  var nextStart = tmp[0]
+  var results = tmp[1]
+  updateTable(results)
+  if (nextStart !== -1) {
+    $('#more-results')
+      .removeClass('d-none')
+      .off('click')
+      .click(function () {
+        update(nextStart)
+      })
+  } else {
+    $('#more-results').addClass('d-none')
   }
 }
 
 // get data and search automatically when the page is fully loaded
-$(document).ready(function(){
-  init();
-  getData();
-  update();
-});
+$(document).ready(function () {
+  init()
+  data = getData('data/advanced/data.json')
+  update()
+})

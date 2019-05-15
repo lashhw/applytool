@@ -16,22 +16,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
   <meta name="description" content="面對學測五選四的來臨，還在苦惱要將心力投注在哪些科系上嗎？這個簡單的小工具，能將雜亂的校系分則整理成可清楚易懂的表格。（資料版本：108學年度）">
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico?v=bOME3jLmbj' />
-  <title>學測個人申請─採計科目查詢【108學年】</title>
+  <title>學測個人申請 - 採計科目查詢（108學年）</title>
   <link rel="canonical" href="https://apply.nctu.me/apply.html"/>
   <!-- bootstrap, jquery, popper.js and floatThead -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.1.3/jquery.floatThead.min.js"></script>
   <!-- external css -->
-  <link rel="stylesheet" href="css/common.css?v=4">
-  <link rel="stylesheet" href="css/apply.css?v=1">
+  <link rel="stylesheet" href="css/common.css?v=5">
+  <link rel="stylesheet" href="css/apply.css?v=2">
   <!-- external js -->
-  <script src="js/apply.js?v=3"></script>
+  <script src="js/common.js?v=1"></script>
+  <script src="js/apply.js?v=5"></script>
 </head>
 <body>
   <div class="content">
+
     <nav class="navbar navbar-expand navbar-light" style="background-color: #e9ecef;">
       <div class="navbar-nav">
         <a class="nav-item nav-link" href="/">首頁</a>
@@ -39,14 +42,17 @@
         <a class="nav-item nav-link" href="advanced.html">考試分發</a>
       </div>
     </nav>
+
     <!-- title bar -->
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
-        <h1>學測個人申請─採計科目查詢<span class="badge badge-secondary">108學年</span></h1>
+        <h1>學測個人申請 - 採計科目查詢 <span class="badge badge-secondary">108學年</span></h1>
         <h2>來看看你想讀的科系採計哪些科目吧！</h2>
       </div>
     </div>
+
     <div class="container">
+
       <!-- search form -->
       <div class="input-group mb-3">
         <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" oninput="update();" maxlength="30">
@@ -58,49 +64,12 @@
           <button class="btn btn-primary" onclick="update()">搜尋</button>
         </div>
       </div>
+
       <!-- advanced options -->
-      <div id="advanced_options" class="collapse float-right form-inline mb-3">
-        <div class="form-group mr-2 mb-0">
-          <label for="sel1" class="subject-title">國文：</label>
-          <select id="sel1" class="custom-select" onchange="update()">
-            <option value="1" selected="selected">不限</option>
-            <option value="2">採計</option>
-            <option value="3">不採計</option>
-          </select>
-        </div>
-        <div class="form-group mr-2 mb-0">
-          <label for="sel2" class="subject-title">英文：</label>
-          <select id="sel2" class="custom-select" onchange="update()">
-            <option value="1" selected="selected">不限</option>
-            <option value="2">採計</option>
-            <option value="3">不採計</option>
-          </select>
-        </div>
-        <div class="form-group mr-2 mb-0">
-          <label for="sel3" class="subject-title">數學：</label>
-          <select id="sel3" class="custom-select" onchange="update()">
-            <option value="1" selected="selected">不限</option>
-            <option value="2">採計</option>
-            <option value="3">不採計</option>
-          </select>
-        </div>
-        <div class="form-group mr-2 mb-0">
-          <label for="sel4" class="subject-title">社會：</label>
-          <select id="sel4" class="custom-select" onchange="update()">
-            <option value="1" selected="selected">不限</option>
-            <option value="2">採計</option>
-            <option value="3">不採計</option>
-          </select>
-        </div>
-        <div class="form-group mr-2 mb-0">
-          <label for="sel5" class="subject-title">自然：</label>
-          <select id="sel5" class="custom-select" onchange="update()">
-            <option value="1" selected="selected">不限</option>
-            <option value="2">採計</option>
-            <option value="3">不採計</option>
-          </select>
-        </div>
-        <div class="form-group mb-0">
+      <div id="advanced_options" class="collapse mb-3">
+
+        <!-- 搜尋模式 -->
+        <div class="form-group" style="float: right;">
           <span id="mode-title">搜尋模式：</span>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" id="mode-indexof" name="mode" class="custom-control-input" value="1" onchange="update()" checked="checked">
@@ -115,6 +84,92 @@
             </label>
           </div>
         </div>
+
+        <br>
+        
+        <!-- 篩選表格 -->
+        <table class="table table-sm table-bordered" id='filterTable' style="margin: 0px auto; clear: both;">
+          <thead class='thead-light'>
+            <tr>
+              <th colspan='6'>要顯示的項目</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td>國文</td>
+              <td>英文</td>
+              <td>數學</td>
+              <td>社會</td>
+              <td>自然</td>
+            </tr>
+            <tr>
+              <td class='s1'>頂標</td>
+              <td class='fc' id='0-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='2-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='3-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='4-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+            </tr>
+            <tr>
+              <td class='s2'>前標</td>
+              <td class='fc' id='0-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='2-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='3-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='4-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+            </tr>
+            <tr>
+              <td class='s3'>均標</td>
+              <td class='fc' id='0-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='2-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='3-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='4-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+            </tr>
+            <tr>
+              <td class='s4'>後標</td>
+              <td class='fc' id='0-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='2-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='3-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='4-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+            </tr>
+            <tr>
+              <td class='s5'>底標</td>
+              <td class='fc' id='0-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='2-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='3-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='4-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+            </tr>
+            <tr>
+              <td class='s6'>一階</td>
+              <td class='fc' id='0-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='2-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='3-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='4-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+            </tr>
+            <tr>
+              <td class='s7'>二階</td>
+              <td class='fc' id='0-6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='2-6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='3-6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='4-6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td class='fc' id='0-7' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-7' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='2-7' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='3-7' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='4-7' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
       <!-- result table -->
       <table class="table table-bordered" id="table_result">
@@ -122,26 +177,38 @@
           <tr>
             <th style="width:20%" class="align-middle">學校</th>
             <th style="width:30%" class="align-middle">科系</th>
-            <th id="t1" class="subject subject-title align-middle">國文</th>
-            <th id="t2" class="subject subject-title align-middle">英文</th>
-            <th id="t3" class="subject subject-title align-middle">數學</th>
-            <th id="t4" class="subject subject-title align-middle">社會</th>
-            <th id="t5" class="subject subject-title align-middle">自然</th>
+            <th id="t1" class="subject align-middle">
+              國<span class="d-none d-md-inline">文</span>
+            </th>
+            <th id="t2" class="subject align-middle">
+              英<span class="d-none d-md-inline">文</span>
+            </th>
+            <th id="t3" class="subject align-middle">
+              數<span class="d-none d-md-inline">學</span>
+            </th>
+            <th id="t4" class="subject align-middle">
+              社<span class="d-none d-md-inline">會</span>
+            </th>
+            <th id="t5" class="subject align-middle">
+              自<span class="d-none d-md-inline">然</span>
+            </th>
           </tr>
         </thead>
         <tbody id="result_content">
 
         </tbody>
       </table>
+
+      <button type="button" class="btn btn-primary btn-block d-none mb-3" id="more-results">更多結果</button>
       <p style="text-align: center">
         本查詢結果僅供參考，實際內容以正式簡章為主。
       </p>
+
     </div>
   </div>
   <div class="footer">
-    資料版本：<a href="https://github.com/jacky030607/apply-tool/blob/master/data/apply/data.json">20190126</a> |
-    <a href="https://github.com/jacky030607/apply-tool">GitHub</a> |
-    <wbr>問題回報：jacky030607@gmail.com
+    資料版本：<a href="https://github.com/jacky030607/apply-tool/blob/master/data/apply/data.json" target="_blank">20190514</a> |
+    <a href="https://github.com/jacky030607/apply-tool" target="_blank">GitHub</a>
   </div>
 </body>
 </html>
