@@ -41,7 +41,10 @@ function updateTable (results) {
     var url = `https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_${r['id']}.htm`
     content += '<tr>'
     content += `<td>${r['school']}</td>`
-    content += `<td><a href='${url}' target='_blank'>${r['name']}</a></td>`
+    content += '<td>'
+    content += `<a href='${url}' target='_blank'>${r['name']}</a>`
+    if (r['listening'] !== '--') content += `(英聽${r['listening']})`
+    content += '</td>'
     for (var j = 0; j < subjects.length; j++) content += getFormatted(r[subjects[j]])
     content += '</tr>'
   }
