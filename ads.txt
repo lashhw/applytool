@@ -1,1 +1,2 @@
 google.com, pub-5399324227936348, DIRECT, f08c47fec0942fa0
+google.com, pub-5399324227936348, RESELLER, f08c47fec0942fa0
