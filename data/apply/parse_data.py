@@ -2,12 +2,20 @@ import requests, json, sys
 from bs4 import BeautifulSoup
 
 subjects = {
-    '國文': 'chinese',
-    '英文': 'english',
-    '數學': 'math',
-    '社會': 'society',
-    '自然': 'science',
-    '英聽': 'listening'
+    '國文': 's1',
+    '英文': 's2',
+    '數學': 's3',
+    '社會': 's4',
+    '自然': 's5',
+    '英聽': 's6'
+}
+subjects_idx = {
+    '國文': 0,
+    '英文': 1,
+    '數學': 2,
+    '社會': 3,
+    '自然': 4,
+    '英聽': 5
 }
 abbr_dict = {
     '國': '國文',
@@ -40,6 +48,7 @@ for id in id_all:
     data[cnt]['id'] = id
     data[cnt]['school'] = allTags[0].get_text().split('\n')[1].strip()
     data[cnt]['name'] = allTags[0].get_text().split('\n')[2].strip()
+    data[cnt]['const'] = ['n', 'n', 'n', 'n', 'n', 'n']
     locate = 0
     for idx, tag in enumerate(allTags):
         s = tag.get_text(strip=True)
@@ -56,6 +65,8 @@ for id in id_all:
                 data[cnt][subjects[s]] = '二階'
             else:
                 data[cnt][subjects[s]] = '--'
+            if d2 != '--':
+                data[cnt]['const'][subjects_idx[s]] = 'y'
 
     multi = allTags[locate + 2].get_text(strip=True)
     if multi != '--':
@@ -63,6 +74,7 @@ for id in id_all:
             if c not in abbr_dict:
                 sys.exit('Abbreviation "%s" is not found.' % c)
             s = abbr_dict[c]
+            data[cnt]['const'][subjects_idx[s]] = 'y'
             if data[cnt][subjects[s]] == '二階' or data[cnt][subjects[s]] == '--':
                 data[cnt][subjects[s]] = '一階'
 
