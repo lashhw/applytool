@@ -14,9 +14,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-  <meta name="description" content="面對學測五選四的來臨，還在苦惱要將心力投注在哪些科系上嗎？這個簡單的小工具，能將雜亂的校系分則整理成可清楚易懂的表格。（資料版本：108學年度）">
+  <meta name="description" content="109 學測個人申請採計科目及檢定標準綜合查詢小工具。">
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico?v=bOME3jLmbj' />
-  <title>學測個人申請 - 採計科目查詢（108學年）</title>
+  <title>學測個人申請 - 採計科目查詢（109學年）</title>
   <link rel="canonical" href="https://apply.nctu.me/apply.html"/>
   <!-- bootstrap, jquery, popper.js and floatThead -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -27,10 +27,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.1.3/jquery.floatThead.min.js"></script>
   <!-- external css -->
   <link rel="stylesheet" href="css/common.css?v=5">
-  <link rel="stylesheet" href="css/apply.css?v=2">
+  <link rel="stylesheet" href="css/apply.css?v=3">
   <!-- external js -->
   <script src="js/common.js?v=1"></script>
-  <script src="js/apply.js?v=6"></script>
+  <script src="js/apply.js?v=7"></script>
 </head>
 <body>
   <div class="content">
@@ -46,7 +46,7 @@
     <!-- title bar -->
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
-        <h1>學測個人申請 - 採計科目查詢 <span class="badge badge-secondary">108學年</span></h1>
+        <h1>學測個人申請 - 採計科目查詢 <span class="badge badge-secondary">109學年</span></h1>
         <h2>來看看你想讀的科系採計哪些科目吧！</h2>
       </div>
     </div>
@@ -104,7 +104,7 @@
               <td>自然</td>
             </tr>
             <tr>
-              <td class='s1'>頂標</td>
+              <td class='standard_1'>頂標</td>
               <td class='fc' id='0-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='1-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='2-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
@@ -112,7 +112,7 @@
               <td class='fc' id='4-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
             </tr>
             <tr>
-              <td class='s2'>前標</td>
+              <td class='standard_2'>前標</td>
               <td class='fc' id='0-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='1-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='2-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
@@ -120,7 +120,7 @@
               <td class='fc' id='4-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
             </tr>
             <tr>
-              <td class='s3'>均標</td>
+              <td class='standard_3'>均標</td>
               <td class='fc' id='0-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='1-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='2-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
@@ -128,7 +128,7 @@
               <td class='fc' id='4-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
             </tr>
             <tr>
-              <td class='s4'>後標</td>
+              <td class='standard_4'>後標</td>
               <td class='fc' id='0-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='1-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='2-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
@@ -136,7 +136,7 @@
               <td class='fc' id='4-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
             </tr>
             <tr>
-              <td class='s5'>底標</td>
+              <td class='standard_5'>底標</td>
               <td class='fc' id='0-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='1-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='2-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
@@ -144,7 +144,7 @@
               <td class='fc' id='4-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
             </tr>
             <tr>
-              <td class='s6'>一階</td>
+              <td class='standard_6'>一階</td>
               <td class='fc' id='0-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='1-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='2-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
@@ -152,7 +152,7 @@
               <td class='fc' id='4-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
             </tr>
             <tr>
-              <td class='s7'>二階</td>
+              <td class='standard_7'>二階</td>
               <td class='fc' id='0-6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='1-6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
               <td class='fc' id='2-6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
@@ -207,7 +207,7 @@
     </div>
   </div>
   <div class="footer">
-    資料版本：<a href="https://github.com/jacky030607/apply-tool/blob/master/data/apply/data.json" target="_blank">20190514</a> |
+    資料版本：<a href="https://github.com/jacky030607/apply-tool/blob/master/data/apply/data.json" target="_blank">20191101</a> |
     <a href="https://github.com/jacky030607/apply-tool" target="_blank">GitHub</a>
   </div>
 </body>
