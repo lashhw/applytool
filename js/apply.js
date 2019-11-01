@@ -32,7 +32,7 @@ function updateTable (results) {
   var content = ''
   for (var i = 0; i < results.length; i++) {
     var r = results[i]
-    var url = `https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_${r['id']}.htm`
+    var url = `https://www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w/html/109_${r['id']}.htm`
     content += '<tr>'
     content += `<td>${r['school']}</td>`
     content += '<td>'

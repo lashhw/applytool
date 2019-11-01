@@ -5,8 +5,8 @@ data = []
 
 # get school url
 # Requests
-url1 = 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/ShowSchool.php'
-r1 = requests.post(url1, data={'option': 'SCHNAME'})
+url1 = 'https://www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w/TotalGsdShow.htm'
+r1 = requests.get(url1)
 r1.encoding = 'utf-8'
 raw1 = r1.text
 # BeautifulSoup
@@ -19,7 +19,7 @@ for link in links:
     sys.stdout.flush()
 
     # Requests
-    url2 = 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/%s' % link
+    url2 = 'https://www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w/%s' % link
     r2 = requests.get(url2, headers={'referer': url1})
     r2.encoding = 'utf-8'
     raw2 = r2.text
