@@ -20,6 +20,7 @@
   <link rel="canonical" href="https://apply.nctu.me/advanced.html"/>
   <!-- bootstrap, jquery, popper.js and floatThead -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
@@ -28,8 +29,8 @@
   <link rel="stylesheet" href="css/common.css?v=5">
   <link rel="stylesheet" href="css/advanced.css?v=2">
   <!-- external js -->
-  <script src="js/common.js?v=1"></script>
-  <script src="js/advanced.js?v=5"></script>
+  <script src="js/common.js?v=2"></script>
+  <script src="js/advanced.js?v=6"></script>
 </head>
 <body>
   <div class="content">
@@ -43,6 +44,7 @@
         <h1><span class="badge badge-secondary">109學年</span></h1>
       </span>
     </nav>
+
     <!-- title bar -->
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
@@ -54,7 +56,9 @@
         </h1>
       </div>
     </div>
+
     <div class="container">
+
       <!-- search form -->
       <div class="input-group mb-3">
         <input type="text" class="form-control" id="qd" placeholder="科系名稱" value="" oninput="update();" maxlength="100">
@@ -66,9 +70,12 @@
           <button class="btn btn-primary" onclick="update()">搜尋</button>
         </div>
       </div>
+
       <!-- advanced options -->
-      <div id="advanced_options" class="collapse float-right">
-        <div class="form-group">
+      <div id="advanced_options" class="collapse mb-3">
+
+        <!-- 搜尋模式 -->
+        <div class="form-group float-right">
           <span id="mode-title">搜尋模式：</span>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" id="mode-indexof" name="mode" class="custom-control-input" value="1" onchange="update()" checked="checked">
@@ -83,6 +90,46 @@
             </label>
           </div>
         </div>
+
+        <br>
+        
+        <!-- 篩選表格 -->
+        <table class="table table-sm table-bordered" id='filterTable' style="margin: 0px auto; clear: both;">
+          <thead class='thead-light'>
+            <tr>
+              <th colspan='11'>要顯示的項目</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>國文</td>
+              <td>英文</td>
+              <td>數甲</td>
+              <td>物理</td>
+              <td>化學</td>
+              <td>生物</td>
+              <td>數乙</td>
+              <td>地理</td>
+              <td>歷史</td>
+              <td>公民</td>
+              <td>術科</td>
+            </tr>
+            <tr>
+              <td class='fc' id='0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='7' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='8' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='9' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='10' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
       <!-- result table -->
       <table class="table table-bordered table-sm" id="table_result">
@@ -115,10 +162,12 @@
 
         </tbody>
       </table>
+
       <button type="button" class="btn btn-primary btn-block d-none mb-3" id="more-results">更多結果</button>
       <p style="text-align: center">
         本查詢結果僅供參考，實際內容以正式簡章為主。
       </p>
+      
     </div>
   </div>
   <div class="footer">

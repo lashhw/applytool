@@ -1,16 +1,18 @@
-/* global search init getData */
+/* eslint-disable dot-notation */
+/* global init getData checkName $ */
 /* eslint-disable camelcase */
 'use strict'
 const resultsPerQuery = 50
 const subjects = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11']
 const subjects_gsat = {
-  's1': 2,
-  's2': 2,
-  's3': 2,
-  's4': 2,
-  's5': 2,
-  's6': 1
+  s1: 2,
+  s2: 2,
+  s3: 2,
+  s4: 2,
+  s5: 2,
+  s6: 1
 }
+var filter = []
 var data = []
 
 function getFormatted (str, colspan, additionalClass) {
@@ -80,6 +82,44 @@ function update (start) {
   } else {
     $('#more-results').addClass('d-none')
   }
+}
+
+// eslint-disable-next-line no-unused-vars
+function changeFilter (id) {
+  if (!filter.includes(subjects[id])) {
+    filter.push(subjects[id])
+    $('#' + id).children().removeClass('oi-check')
+  } else {
+    var index = filter.indexOf(subjects[id])
+    filter.splice(index, 1)
+    $('#' + id).children().addClass('oi-check')
+  }
+  update()
+}
+
+function search (data, mode, qd, qs, limit, start) {
+  if (qd === '' && qs === '') return [-1, []]
+
+  var results = []
+  var cnt = 0
+  for (var i = start; i < data.length; i++) {
+    if (cnt === limit) return [i, results]
+    var testData = data[i]
+
+    var flagName = checkName(testData, mode, qd, qs)
+    if (flagName === false) continue
+
+    var flagFilter = true
+    for (var j = 0; j < filter.length; j++) {
+      if (testData['subjects'][filter[j]] !== undefined) flagFilter = false
+    }
+
+    if (flagName && flagFilter) {
+      results.push(testData)
+      cnt++
+    }
+  }
+  return [-1, results]
 }
 
 // get data and search automatically when the page is fully loaded
