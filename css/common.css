@@ -60,3 +60,7 @@ body {
   color: rgb(128, 128, 128);
   font-weight: bold;
 }
+
+.fc {
+  cursor: pointer;
+}
