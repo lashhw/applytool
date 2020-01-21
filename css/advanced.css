@@ -1,6 +1,14 @@
+@media screen and (max-width: 1200px){
+  .weight {
+    font-size: 0.8rem;
+  }
+}
 @media screen and (max-width: 1023px){
   table th,td {
     font-size: 0.7rem;
+  }
+  .weight {
+    font-size: 0.6rem;
   }
 }
 

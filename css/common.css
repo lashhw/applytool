@@ -1,6 +1,9 @@
 @media screen and (max-width: 767px){
   h1 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+  }
+  #caution {
+    font-size: 0.85rem;
   }
 }
 
@@ -52,7 +55,6 @@ body {
   padding: 0.7rem;
   color: rgb(128, 128, 128);
   font-size: 0.9rem;
-  background-color: #e9ecef;
   text-align: center;
   white-space: nowrap;
 }

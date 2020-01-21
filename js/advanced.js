@@ -32,7 +32,7 @@ function updateTable (results) {
       if (subjects[j] in r['subjects']) {
         content += getFormatted(
           `<span class='d-md-none'>採</span>
-           <span class='d-none d-md-inline'>x${r['subjects'][subjects[j]]}</span>`,
+           <span class='weight d-none d-md-inline'>x${r['subjects'][subjects[j]]}</span>`,
           1,
           'advanced'
         )

@@ -26,15 +26,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.1.3/jquery.floatThead.min.js"></script>
   <!-- external css -->
-  <link rel="stylesheet" href="css/common.css?v=7">
-  <link rel="stylesheet" href="css/apply.css?v=4">
+  <link rel="stylesheet" href="css/common.css?v=8">
+  <link rel="stylesheet" href="css/apply.css?v=5">
   <!-- external js -->
-  <script src="js/common.js?v=4"></script>
+  <script src="js/common.js?v=6"></script>
   <script src="js/apply.js?v=9"></script>
 </head>
 <body>
   <div class="content">
-    <nav class="navbar navbar-expand navbar-light" style="background-color: #e9ecef;">
+    <nav class="navbar navbar-expand navbar-light bg-light">
       <div class="navbar-nav mr-auto">
         <a class="nav-item nav-link" href="/">首頁</a>
         <a class="nav-item nav-link active" href="apply.html">個人申請</a>
@@ -46,15 +46,13 @@
     </nav>
 
     <!-- title bar -->
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1>
-          學測個人申請 - 採計科目查詢 
-          <span class="d-none d-md-inline">
-            <span class="badge badge-secondary">109學年</span>
-          </span>
-        </h1>
-      </div>
+    <div class="container pt-4 pb-3">
+      <h1>
+        學測個人申請 - 採計科目查詢 
+        <span class="d-none d-md-inline">
+          <span class="badge badge-secondary">109學年</span>
+        </span>
+      </h1>
     </div>
 
     <div class="container">
@@ -206,10 +204,10 @@
       </table>
 
       <button type="button" class="btn btn-primary btn-block d-none mb-3" id="more-results">更多結果</button>
-      <p style="text-align: center; font-size: 0.9rem;">
+      <p id="caution" style="text-align: center;">
         本查詢結果僅供參考，實際內容以正式簡章為主。
       </p>
-      <p style="text-align: center; font-size: 0.8rem;">
+      <p class="text-secondary" style="text-align: center; font-size: 0.8rem;">
         以灰底字標示之科目，表示其未設定篩選倍率，但超篩仍可能採計，請務必注意。
         <br>
         顯示順序以<b>標準</b>、<b>一階</b>(表示一階會採計但未設標)、<b>二階</b>依次優先顯示。因此，若某科目一階及二階皆採計，則該科會顯示標準或「一階」。
@@ -217,7 +215,7 @@
 
     </div>
   </div>
-  <div class="footer">
+  <div class="footer bg-light">
     資料版本：<a href="https://github.com/jacky030607/apply-tool/blob/master/data/apply/data.json" target="_blank">20191101</a> |
     <a href="https://github.com/jacky030607/apply-tool" target="_blank">GitHub</a>
   </div>
