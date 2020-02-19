@@ -1,6 +1,7 @@
+/* eslint-disable no-labels */
 /* eslint-disable dot-notation */
-/* global init getData checkName $ */
 /* eslint-disable camelcase */
+/* global init getData checkName $ */
 'use strict'
 const resultsPerQuery = 50
 const subjects = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11']
@@ -12,7 +13,8 @@ const subjects_gsat = {
   s5: 2,
   s6: 1
 }
-var filter = []
+var filter_include = []
+var filter_exclude = []
 var data = []
 
 function getFormatted (str, colspan, additionalClass) {
@@ -86,13 +88,28 @@ function update (start) {
 
 // eslint-disable-next-line no-unused-vars
 function changeFilter (id) {
-  if (!filter.includes(subjects[id])) {
-    filter.push(subjects[id])
-    $('#' + id).children().removeClass('oi-check')
-  } else {
-    var index = filter.indexOf(subjects[id])
-    filter.splice(index, 1)
-    $('#' + id).children().addClass('oi-check')
+  var target = subjects[id.split('-')[1]]
+  switch (id.split('-')[0]) {
+    case '0':
+      if (!filter_include.includes(target)) {
+        filter_include.push(target)
+        $('#' + id).children().removeClass('oi-check')
+      } else {
+        var target_index1 = filter_include.indexOf(target)
+        filter_include.splice(target_index1, 1)
+        $('#' + id).children().addClass('oi-check')
+      }
+      break
+    case '1':
+      if (!filter_exclude.includes(target)) {
+        filter_exclude.push(target)
+        $('#' + id).children().removeClass('oi-check')
+      } else {
+        var target_index2 = filter_exclude.indexOf(target)
+        filter_exclude.splice(target_index2, 1)
+        $('#' + id).children().addClass('oi-check')
+      }
+      break
   }
   update()
 }
@@ -102,22 +119,21 @@ function search (data, mode, qd, qs, limit, start) {
 
   var results = []
   var cnt = 0
+  main_loop:
   for (var i = start; i < data.length; i++) {
     if (cnt === limit) return [i, results]
     var testData = data[i]
 
-    var flagName = checkName(testData, mode, qd, qs)
-    if (flagName === false) continue
-
-    var flagFilter = true
-    for (var j = 0; j < filter.length; j++) {
-      if (testData['subjects'][filter[j]] !== undefined) flagFilter = false
+    if (checkName(testData, mode, qd, qs) === false) continue main_loop
+    for (var j = 0; j < filter_include.length; j++) {
+      if (testData['subjects'][filter_include[j]] !== undefined) continue main_loop
+    }
+    for (var k = 0; k < filter_exclude.length; k++) {
+      if (testData['subjects'][filter_exclude[k]] === undefined) continue main_loop
     }
 
-    if (flagName && flagFilter) {
-      results.push(testData)
-      cnt++
-    }
+    results.push(testData)
+    cnt++
   }
   return [-1, results]
 }

@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="css/advanced.css?v=3">
   <!-- external js -->
   <script src="js/common.js?v=2"></script>
-  <script src="js/advanced.js?v=6"></script>
+  <script src="js/advanced.js?v=7"></script>
 </head>
 <body>
   <div class="content">
@@ -95,11 +95,12 @@
         <table class="table table-sm table-bordered" id='filterTable' style="margin: 0px auto; clear: both;">
           <thead class='thead-light'>
             <tr>
-              <th colspan='11'>要顯示的項目</th>
+              <th colspan='12'>要顯示的項目</th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td></td>
               <td>國文</td>
               <td>英文</td>
               <td>數甲</td>
@@ -107,23 +108,38 @@
               <td>化學</td>
               <td>生物</td>
               <td>數乙</td>
-              <td>地理</td>
               <td>歷史</td>
+              <td>地理</td>
               <td>公民</td>
               <td>術科</td>
             </tr>
             <tr>
-              <td class='fc' id='0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
-              <td class='fc' id='1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
-              <td class='fc' id='2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
-              <td class='fc' id='3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
-              <td class='fc' id='4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
-              <td class='fc' id='5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
-              <td class='fc' id='6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
-              <td class='fc' id='7' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
-              <td class='fc' id='8' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
-              <td class='fc' id='9' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
-              <td class='fc' id='10' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='advanced'>採<span class="d-none d-md-inline">計</span></td>
+              <td class='fc' id='0-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='0-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='0-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='0-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='0-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='0-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='0-6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='0-7' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='0-8' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='0-9' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='0-10' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td class='fc' id='1-0' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-1' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-2' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-3' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-4' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-5' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-6' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-7' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-8' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-9' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
+              <td class='fc' id='1-10' onclick='changeFilter(this.id)'><span class="oi oi-check"></span></td>
             </tr>
           </tbody>
         </table>
