@@ -44,17 +44,16 @@ u.dotted{
 }
 
 html, body {
-  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 body {
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
-.content {
-  flex: auto;
-}
 .footer {
-  flex: none;
+  margin-top: auto;
   padding: 0.7rem;
   color: rgb(128, 128, 128);
   font-size: 0.9rem;
