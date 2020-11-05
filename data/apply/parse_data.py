@@ -34,7 +34,7 @@ for id in id_all:
     sys.stdout.flush()
 
     # Requests
-    url = 'https://www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w/html/109_%s.htm' % id
+    url = 'https://www.cac.edu.tw/apply110/system/110_aColQry4qy_forapply_o5wp6ju/html/110_%s.htm' % id
     r = requests.get(url)
     r.encoding = 'utf-8'
     rawhtml = r.text
